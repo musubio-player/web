@@ -3,3 +3,9 @@
 body {
   font-family: "Roboto", arial, "Noto Sans Japanese", sans-serif !important;
 }
+
+/* line 8, ../sass/main.scss */
+core-toolbar {
+  background-color: #ed6d00;
+  color: #ffffff;
+}
