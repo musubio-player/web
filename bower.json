@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "0.0.0",
-  "homepage": "https://github.com/musubio-player/app",
+  "homepage": "https://github.com/musubio-player/web",
   "authors": [
     "khalib <caleb.strumms@gmail.com>"
   ],
@@ -14,8 +14,8 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.1.0",
-    "paper-elements": "PolymerElements/paper-elements#~1.0.5",
-    "iron-ajax": "PolymerElements/iron-ajax#~1.0.6"
+    "core-toolbar": "Polymer/core-toolbar#~0.5.6",
+    "paper-icon-button": "Polymer/paper-icon-button#~0.5.6",
+    "paper-progress": "Polymer/paper-progress#~0.5.6"
   }
 }
