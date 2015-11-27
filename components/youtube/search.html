@@ -1,0 +1,58 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+
+<!--
+An element for fetching GitHub issues
+
+Example:
+
+    <youtube-search></youtube-search>
+
+@group Seed Elements
+@element youtube-search
+@demo demo/index.html
+@hero hero.svg
+-->
+<dom-module id="youtube-search">
+  <template>
+    <iron-ajax
+      auto
+      url="{{url}}"
+      handle-as="json"
+      last-response="{{response}}"></iron-ajax>
+
+    <template is="dom-repeat" items="{{response.items}}" as="video">
+      <div>
+        <a href="{{video.videoURL}}">
+          <img src="{{video.thumbnailDefaultURL}}">
+        </a>
+        <br />
+
+        <a href="{{video.videoURL}}">{{video.title}}</a>
+        <hr />
+      </div>
+    </template>
+  </template>
+
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'youtube-search',
+
+    properties: {
+      q: {
+        value: 'sfgiants',
+        notify: true
+      },
+      url: {
+        computed: 'computeUrl(q)'
+      }
+    },
+
+    computeUrl: function(q) {
+      return 'http://local.api.musubio.com/videos/search?q=' + q;
+//      return 'http://local.musubio.com/components/youtube/data.json';
+    }
+  });
+</script>
