@@ -5,7 +5,19 @@ body {
   font-family: "Roboto", arial, "Noto Sans Japanese", sans-serif !important;
 }
 
+[main] {
+  background-color: #f9f9f9;
+}
+
+[drawer] {
+  background-color: #ffffff;
+}
+
 core-toolbar {
   background-color: $primary-color;
   color: #ffffff;
+}
+
+core-drawer-panel:not([narrow]) #navicon {
+  display: none;
 }

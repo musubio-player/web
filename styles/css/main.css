@@ -5,7 +5,22 @@ body {
 }
 
 /* line 8, ../sass/main.scss */
+[main] {
+  background-color: #f9f9f9;
+}
+
+/* line 12, ../sass/main.scss */
+[drawer] {
+  background-color: #ffffff;
+}
+
+/* line 16, ../sass/main.scss */
 core-toolbar {
   background-color: #ed6d00;
   color: #ffffff;
+}
+
+/* line 21, ../sass/main.scss */
+core-drawer-panel:not([narrow]) #navicon {
+  display: none;
 }
