@@ -2,25 +2,81 @@
 /* line 4, ../sass/main.scss */
 body {
   font-family: "Roboto", arial, "Noto Sans Japanese", sans-serif !important;
+  margin: 0;
+}
+/* line 8, ../sass/main.scss */
+body a {
+  text-decoration: none;
+  color: #333333;
+}
+/* line 13, ../sass/main.scss */
+body input[type="text"] {
+  width: 100%;
+  font-size: 2.0em;
+  color: #666666;
 }
 
-/* line 8, ../sass/main.scss */
+/* line 20, ../sass/main.scss */
 [main] {
   background-color: #f9f9f9;
 }
+/* line 23, ../sass/main.scss */
+[main] .content {
+  padding: 15px;
+}
 
-/* line 12, ../sass/main.scss */
+/* line 28, ../sass/main.scss */
 [drawer] {
   background-color: #ffffff;
 }
+/* line 31, ../sass/main.scss */
+[drawer] paper-toolbar {
+  background-color: #ffffff !important;
+  color: #2ca94f;
+}
+/* line 37, ../sass/main.scss */
+[drawer] paper-menu.nav paper-item {
+  padding: 10px 0;
+  display: block;
+}
+/* line 42, ../sass/main.scss */
+[drawer] paper-menu.nav .nav-divider {
+  height: 1px;
+  background-color: gainsboro;
+  margin: 15px 0;
+}
 
-/* line 16, ../sass/main.scss */
-core-toolbar {
-  background-color: #ed6d00;
+/* line 50, ../sass/main.scss */
+paper-toolbar {
+  background-color: #2ca94f !important;
   color: #ffffff;
 }
 
-/* line 21, ../sass/main.scss */
-core-drawer-panel:not([narrow]) #navicon {
+/* line 55, ../sass/main.scss */
+paper-drawer-panel:not([narrow]) #navicon {
   display: none;
+}
+
+/* line 59, ../sass/main.scss */
+paper-card.video {
+  width: 180px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+/* line 64, ../sass/main.scss */
+paper-card.video .info {
+  position: relative;
+  overflow: hidden;
+}
+/* line 68, ../sass/main.scss */
+paper-card.video .info .image {
+  margin-left: -90px;
+}
+/* line 72, ../sass/main.scss */
+paper-card.video .info .content {
+  padding: 10px;
+}
+/* line 75, ../sass/main.scss */
+paper-card.video .info .content .title {
+  font-size: .8em;
 }

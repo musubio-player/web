@@ -14,9 +14,10 @@
     "tests"
   ],
   "dependencies": {
-    "core-toolbar": "Polymer/core-toolbar#~0.5.6",
-    "paper-icon-button": "Polymer/paper-icon-button#~0.5.6",
-    "paper-progress": "Polymer/paper-progress#~0.5.6",
-    "core-elements": "Polymer/core-elements#~0.5.6"
+    "polymer": "Polymer/polymer#^1.2.0",
+    "iron-elements": "PolymerElements/iron-elements#~1.0.4",
+    "paper-elements": "PolymerElements/paper-elements#~1.0.6",
+    "google-web-components": "GoogleWebComponents/google-web-components#~1.0.1",
+    "platform": "Polymer/platform#~0.4.2"
   }
 }
