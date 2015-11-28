@@ -1,8 +1,9 @@
-/* Template */
-/* line 4, ../sass/main.scss */
+/* line 3, ../sass/main.scss */
 body {
+  /* Globals */
   font-family: "Roboto", arial, "Noto Sans Japanese", sans-serif !important;
   margin: 0;
+  /* Template */
 }
 /* line 8, ../sass/main.scss */
 body a {
@@ -15,72 +16,99 @@ body input[type="text"] {
   font-size: 2.0em;
   color: #666666;
 }
-
 /* line 20, ../sass/main.scss */
-[main] {
-  background-color: #f9f9f9;
-}
-/* line 23, ../sass/main.scss */
-[main] .content {
-  padding: 15px;
-}
-
-/* line 28, ../sass/main.scss */
-[drawer] {
+body [drawer] {
   background-color: #ffffff;
 }
-/* line 31, ../sass/main.scss */
-[drawer] paper-toolbar {
+/* line 23, ../sass/main.scss */
+body [drawer] paper-toolbar#nav-toolbar {
   background-color: #ffffff !important;
   color: #2ca94f;
 }
-/* line 37, ../sass/main.scss */
-[drawer] paper-menu.nav paper-item {
+/* line 29, ../sass/main.scss */
+body [drawer] paper-menu.nav paper-item {
   padding: 10px 0;
   display: block;
 }
-/* line 42, ../sass/main.scss */
-[drawer] paper-menu.nav .nav-divider {
+/* line 34, ../sass/main.scss */
+body [drawer] paper-menu.nav .nav-divider {
   height: 1px;
   background-color: gainsboro;
   margin: 15px 0;
 }
-
+/* line 42, ../sass/main.scss */
+body [main] {
+  background-color: #f9f9f9;
+}
+/* line 45, ../sass/main.scss */
+body [main] .content {
+  padding: 15px;
+}
 /* line 50, ../sass/main.scss */
-paper-toolbar {
+body paper-toolbar#main-toolbar {
   background-color: #2ca94f !important;
   color: #ffffff;
 }
-
 /* line 55, ../sass/main.scss */
-paper-drawer-panel:not([narrow]) #navicon {
+body paper-drawer-panel:not([narrow]) #navicon {
   display: none;
 }
-
 /* line 59, ../sass/main.scss */
+body paper-toolbar#player-toolbar {
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  background: #333333;
+  height: 100px;
+}
+/* line 66, ../sass/main.scss */
+body paper-toolbar#player-toolbar .toolbar-tools {
+  height: 100px;
+}
+/* line 69, ../sass/main.scss */
+body paper-toolbar#player-toolbar .toolbar-tools .image {
+  height: 135px;
+  margin-bottom: 60px;
+}
+/* line 74, ../sass/main.scss */
+body paper-toolbar#player-toolbar .toolbar-tools .content {
+  margin-left: 15px;
+}
+/* line 77, ../sass/main.scss */
+body paper-toolbar#player-toolbar .toolbar-tools .content .title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+/* line 82, ../sass/main.scss */
+body paper-toolbar#player-toolbar .toolbar-tools .content .playlist {
+  font-weight: normal;
+}
+
+/* Pages */
+/* line 91, ../sass/main.scss */
 paper-card.video {
   width: 210px;
   margin-right: 15px;
   margin-bottom: 15px;
 }
-/* line 64, ../sass/main.scss */
+/* line 96, ../sass/main.scss */
 paper-card.video .info {
   position: relative;
   overflow: hidden;
 }
-/* line 68, ../sass/main.scss */
+/* line 100, ../sass/main.scss */
 paper-card.video .info .image {
   margin-left: -90px;
 }
-/* line 71, ../sass/main.scss */
+/* line 103, ../sass/main.scss */
 paper-card.video .info .image img {
   height: 210px;
 }
-/* line 76, ../sass/main.scss */
+/* line 108, ../sass/main.scss */
 paper-card.video .info .content {
   padding: 10px;
 }
-/* line 79, ../sass/main.scss */
+/* line 111, ../sass/main.scss */
 paper-card.video .info .content .title {
   font-size: .8em;
 }
