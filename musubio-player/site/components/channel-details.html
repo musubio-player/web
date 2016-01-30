@@ -1,0 +1,53 @@
+<!--
+An element for fetching Musubio channels
+
+Example:
+
+    <channel-details></channel-details>
+
+@element channel-details
+-->
+<dom-module id="channel-details">
+  <template>
+    <!--5891733057437696 5328783104016384-->
+    <iron-ajax
+      auto
+      url="http://localhost:8888/_ah/api/musubio/v1/channels/5328783104016384"
+      handle-as="json"
+      last-response="{{channel}}">
+    </iron-ajax>
+
+    <iframe
+        width="800"
+        height="450"
+        src="https://www.youtube.com/embed/{{channel.videos.0.video_id}}?rel=0&amp;showinfo=0&autoplay=1&controls=1&start=1000"
+        frameborder="0"
+        allowfullscreen>
+    </iframe>
+    <div class="current-video">
+      <h1>{{channel.videos.0.title}}</h1>
+      <div>{{channel.videos.0.description}}</div>
+    </div>
+
+    <div class="channel-info">
+      <h3>{{channel.title}}</h3>
+      <div>{{channel.description}}</div>
+    </div>
+
+    <h2>Playlist</h2>
+    <template class="playlist" is="dom-repeat" items="{{channel.videos}}" as="video">
+      <img src="{{video.image.medium}}">
+    </template>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'channel-details',
+    properties: {
+
+    }
+  });
+</script>

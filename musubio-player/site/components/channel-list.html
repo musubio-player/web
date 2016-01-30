@@ -1,0 +1,40 @@
+<!--
+An element for fetching Musubio channels
+
+Example:
+
+    <channel-list></channel-list>
+
+@element channel-list
+-->
+<dom-module id="channel-list">
+  <template>
+    <iron-ajax
+      auto
+      url="http://localhost:8888/_ah/api/musubio/v1/channels"
+      handle-as="json"
+      last-response="{{response}}"></iron-ajax>
+
+    <template class="channel" is="dom-repeat" items="{{response.items}}" as="channel">
+      <paper-card class="item-list">
+        <a href="/channel/{{channel.id}}">
+          <div class="info">
+            <div class="image">
+              <img src="{{channel.videos.0.image.medium}}">
+            </div>
+            <div class="content">
+              <div class="title">{{channel.title}}</div>
+              <div class="description quiet">{{channel.description}}</div>
+            </div>
+          </div>
+        </a>
+      </paper-card>
+    </template>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'channel-list'
+  });
+</script>

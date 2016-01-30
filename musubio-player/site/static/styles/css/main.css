@@ -1,0 +1,124 @@
+/* line 3, ../sass/main.scss */
+body {
+  /* Globals */
+  font-family: "Roboto", arial, "Noto Sans Japanese", sans-serif !important;
+  margin: 0;
+  /* Text helpers */
+  /* Template */
+}
+/* line 8, ../sass/main.scss */
+body a {
+  text-decoration: none;
+  color: #333333;
+}
+/* line 14, ../sass/main.scss */
+body .quiet {
+  font-size: .8em;
+  color: #999999;
+}
+/* line 19, ../sass/main.scss */
+body .loud {
+  font-size: 1.1em;
+}
+/* line 23, ../sass/main.scss */
+body input[type="text"] {
+  width: 100%;
+  font-size: 2.0em;
+  color: #666666;
+}
+/* line 30, ../sass/main.scss */
+body [drawer] {
+  background-color: #ffffff;
+}
+/* line 33, ../sass/main.scss */
+body [drawer] paper-toolbar#nav-toolbar {
+  background-color: #ffffff !important;
+  color: #2ca94f;
+}
+/* line 39, ../sass/main.scss */
+body [drawer] paper-menu.nav paper-item {
+  padding: 10px 0;
+  display: block;
+}
+/* line 44, ../sass/main.scss */
+body [drawer] paper-menu.nav .nav-divider {
+  height: 1px;
+  background-color: gainsboro;
+  margin: 15px 0;
+}
+/* line 52, ../sass/main.scss */
+body [main] {
+  background-color: #f9f9f9;
+}
+/* line 55, ../sass/main.scss */
+body [main] .content {
+  padding: 15px;
+}
+/* line 60, ../sass/main.scss */
+body paper-toolbar#main-toolbar {
+  background-color: #2ca94f !important;
+  color: #ffffff;
+}
+/* line 65, ../sass/main.scss */
+body paper-drawer-panel:not([narrow]) #navicon {
+  display: none;
+}
+/* line 69, ../sass/main.scss */
+body paper-toolbar#player-toolbar {
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  background: #333333;
+  height: 100px;
+}
+/* line 76, ../sass/main.scss */
+body paper-toolbar#player-toolbar .toolbar-tools {
+  height: 100px;
+}
+/* line 79, ../sass/main.scss */
+body paper-toolbar#player-toolbar .toolbar-tools .image {
+  height: 135px;
+  margin-bottom: 60px;
+}
+/* line 84, ../sass/main.scss */
+body paper-toolbar#player-toolbar .toolbar-tools .content {
+  margin-left: 15px;
+}
+/* line 87, ../sass/main.scss */
+body paper-toolbar#player-toolbar .toolbar-tools .content .title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+/* line 92, ../sass/main.scss */
+body paper-toolbar#player-toolbar .toolbar-tools .content .playlist {
+  font-weight: normal;
+}
+
+/* Pages */
+/* line 101, ../sass/main.scss */
+paper-card.item-list {
+  width: 210px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+/* line 106, ../sass/main.scss */
+paper-card.item-list .info {
+  position: relative;
+  overflow: hidden;
+}
+/* line 110, ../sass/main.scss */
+paper-card.item-list .info .image {
+  margin-left: -90px;
+}
+/* line 113, ../sass/main.scss */
+paper-card.item-list .info .image img {
+  height: 210px;
+}
+/* line 118, ../sass/main.scss */
+paper-card.item-list .info .content {
+  padding: 10px;
+}
+/* line 121, ../sass/main.scss */
+paper-card.item-list .info .content .title {
+  font-size: .9em;
+}

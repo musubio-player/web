@@ -1,0 +1,44 @@
+<link rel="import" href="/static/bower_components/polymer/polymer.html">
+<link rel="import" href="/static/bower_components/iron-ajax/iron-ajax.html">
+
+<!--
+A static player toolbar at the bottom of the app.
+
+Example:
+
+    <player-toolbar></player-toolbar>
+
+-->
+<dom-module id="youtube-search">
+  <template>
+    <paper-toolbar id="player-toolbar" elevation="1">
+      <paper-material class="image" elevation="3">
+        <iframe width="240" height="135" src="https://www.youtube.com/embed/d1AWMLgjyvk?rel=0&amp;controls=0&amp;showinfo=0&amp;start=12067&amp;t=3h21m7s&amp;autoplay=1" frameborder="0" allowfullscreen></iframe>
+      </paper-material>
+
+      <div class="content">
+        <div class="title">San Francisco Giants 2014 Highlights</div>
+        <div class="playlist">SF Giants Faves</div>
+      </div>
+    </paper-toolbar>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'youtube-search',
+
+    properties: {
+      q: {
+        value: 'sfgiants',
+        notify: true
+      },
+      url: {
+        computed: 'computeUrl(q)'
+      }
+    },
+
+    computeUrl: function(q) {
+      return 'http://local.api.musubio.com/videos/search?q=' + q;
+    }
+  });
+</script>

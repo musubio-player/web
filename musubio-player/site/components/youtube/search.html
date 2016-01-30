@@ -1,0 +1,56 @@
+<!--
+An element for searching videos on YouTube
+
+Example:
+
+    <youtube-search></youtube-search>
+
+@element youtube-search
+-->
+<dom-module id="youtube-search">
+  <template>
+    <iron-ajax
+      auto
+      url="{{url}}"
+      handle-as="json"
+      last-response="{{response}}"></iron-ajax>
+
+    <div>
+      <input type="text" value="{{q::change}}">
+      <br /><br />
+    </div>
+
+    <template class="video-list" is="dom-repeat" items="{{response.items}}" as="video">
+      <paper-card class="item-list">
+        <div class="info">
+          <div class="image">
+            <img src="{{video.thumbnail.medium}}">
+          </div>
+          <div class="content">
+            <a href="{{video.videoURL}}" class="title">{{video.title}}</a>
+          </div>
+        </div>
+      </paper-card>
+    </template>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'youtube-search',
+    properties: {
+      q: {
+        value: 'sfgiants',
+        notify: true
+      },
+      url: {
+        computed: 'computeUrl(q)'
+      }
+    },
+    computeUrl: function(q) {
+//      return 'https://musubio-player-api.appspot.com/_ah/api/musubio/v1/search?q=' + q;
+      return 'http://localhost:8888/_ah/api/musubio/v1/search?q=' + q;
+//      return 'http://local.api.musubio.com/videos/search?q=' + q;
+    }
+  });
+</script>
