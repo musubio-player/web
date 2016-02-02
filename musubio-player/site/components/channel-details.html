@@ -11,21 +11,23 @@ Example:
   <template>
     <iron-ajax
       auto
-      url="https://musubio-player-api.appspot.com/_ah/api/musubio/v1/channels/{{channelId}}"
+      url="{{apiHost}}/_ah/api/musubio/v1/channels/{{channelId}}"
       handle-as="json"
+      on-response="responseChannel"
       last-response="{{channel}}">
     </iron-ajax>
 
     <iframe
         width="800"
         height="450"
-        src="https://www.youtube.com/embed/{{channel.videos.1.video_id}}?rel=0&amp;showinfo=0&autoplay=1&controls=1&start=123"
+        src="https://www.youtube.com/embed/{{currentVideo.video_id}}?rel=0&amp;showinfo=0&autoplay=1&controls=1&start={{videoStartTime}}"
         frameborder="0"
         allowfullscreen>
     </iframe>
+
     <div class="current-video">
-      <h1>{{channel.videos.0.title}}</h1>
-      <div>{{channel.videos.0.description}}</div>
+      <h1>{{currentVideo.title}}</h1>
+      <div>{{currentVideo.description}}</div>
     </div>
 
     <div class="channel-info">
@@ -46,7 +48,24 @@ Example:
   Polymer({
     is: 'channel-details',
     properties: {
-
+      apiHost: {
+        type: String,
+        value: musubioApiHost
+      },
+      videoStartTime: {
+        type: Number,
+        value: Math.floor(Math.random() * (300 - 1) + 1)
+      },
+      currentVideoId: {
+        type: String
+      }
+    },
+    responseChannel: function(request) {
+      var channel = request.detail.response;
+      var videos = channel.videos;
+      var randomIndex = Math.floor(Math.random() * (videos.length - 0) + 0);
+      this.currentVideo = videos[randomIndex];
     }
   });
+
 </script>
