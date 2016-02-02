@@ -9,10 +9,9 @@ Example:
 -->
 <dom-module id="channel-details">
   <template>
-    <!--5891733057437696 5328783104016384-->
     <iron-ajax
       auto
-      url="http://localhost:8888/_ah/api/musubio/v1/channels/5328783104016384"
+      url="https://musubio-player-api.appspot.com/_ah/api/musubio/v1/channels/{{channelId}}"
       handle-as="json"
       last-response="{{channel}}">
     </iron-ajax>
@@ -20,7 +19,7 @@ Example:
     <iframe
         width="800"
         height="450"
-        src="https://www.youtube.com/embed/{{channel.videos.0.video_id}}?rel=0&amp;showinfo=0&autoplay=1&controls=1&start=1000"
+        src="https://www.youtube.com/embed/{{channel.videos.1.video_id}}?rel=0&amp;showinfo=0&autoplay=1&controls=1&start=123"
         frameborder="0"
         allowfullscreen>
     </iframe>

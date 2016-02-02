@@ -6,4 +6,9 @@ threadsafe: yes
 
 handlers:
 - url: /
-  static_dir: site
+  static_files: site/index.html
+  upload: site/index.html
+
+- url: /(.*)
+  static_files: site/\1
+  upload: (.*)

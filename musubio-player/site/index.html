@@ -9,6 +9,7 @@
     <script src="/static/bower_components/platform/platform.js"></script>
     <script src="/static/bower_components/page/page.js"></script>
     <script src="/static/scripts/js/app.js"></script>
+    <script src="/static/scripts/js/youtube.js"></script>
 
     <link type="text/css" rel="stylesheet" media="all" href="/static/styles/css/main.css?v=0.1" />
     <link rel="import" href="/elements.html">
@@ -32,6 +33,12 @@
         </paper-toolbar>
 
         <paper-menu class="nav">
+          <paper-item>
+            <a href="/#/">
+              <iron-icon icon="home"></iron-icon>
+              Home
+            </a>
+          </paper-item>
           <paper-item>
             <a href="">
               <iron-icon icon="search"></iron-icon>
@@ -59,17 +66,11 @@
 
         <div class="content">
           <template is="dom-bind">
-            <iron-pages selected="channel-details" attr-for-selected="data-route">
-              <div data-route="search">
-                <youtube-search></youtube-search>
-              </div>
-              <div data-route="channel-list">
-                <channel-list></channel-list>
-              </div>
-              <div data-route="channel-details">
-                <channel-details></channel-details>
-              </div>
-            </iron-pages>
+            <app-router>
+              <app-route path="/" import="/components/channel-list.html"></app-route>
+              <app-route path="/channels/:channelId" import="/components/channel-details.html"></app-route>
+              <app-route path="*" import="/components/404.html"></app-route>
+            </app-router>
           </template>
         </div>
 

@@ -11,13 +11,13 @@ Example:
   <template>
     <iron-ajax
       auto
-      url="http://localhost:8888/_ah/api/musubio/v1/channels"
+      url="https://musubio-player-api.appspot.com/_ah/api/musubio/v1/channels"
       handle-as="json"
       last-response="{{response}}"></iron-ajax>
 
-    <template class="channel" is="dom-repeat" items="{{response.items}}" as="channel">
+    <template class="channel" is="dom-repeat" items="{{response.channels}}" as="channel">
       <paper-card class="item-list">
-        <a href="/channel/{{channel.id}}">
+        <a href="#/channels/{{channel.id}}">
           <div class="info">
             <div class="image">
               <img src="{{channel.videos.0.image.medium}}">

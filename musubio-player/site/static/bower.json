@@ -19,6 +19,7 @@
     "paper-elements": "PolymerElements/paper-elements#~1.0.6",
     "google-web-components": "GoogleWebComponents/google-web-components#~1.0.1",
     "platform": "Polymer/platform#~0.4.2",
-    "page": "page.js#~1.6.4"
+    "page": "page.js#~1.6.4",
+    "app-router": "~2.6.1"
   }
 }
