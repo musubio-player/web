@@ -53,18 +53,42 @@ Example:
         value: musubioApiHost
       },
       videoStartTime: {
-        type: Number,
-        value: Math.floor(Math.random() * (300 - 1) + 1)
+        type: Number
       },
       currentVideoId: {
         type: String
       }
     },
     responseChannel: function(request) {
+      // Get the channel/video data from the API response.
       var channel = request.detail.response;
       var videos = channel.videos;
-      var randomIndex = Math.floor(Math.random() * (videos.length - 0) + 0);
-      this.currentVideo = videos[randomIndex];
+
+      var playlistTotalDuration = 0;
+      videos.forEach(function(video) {
+        playlistTotalDuration += parseInt(video.duration);
+      });
+
+      var now = Math.floor(new Date().getTime() / 1000);
+      var baseTime = Math.floor(new Date(channel.created).getTime() / 1000);
+      var timeSinceBaseTime = now - baseTime;
+      var playlistStartTime = timeSinceBaseTime % playlistTotalDuration;
+
+      var currDuration = 0;
+      var videoIndex = 0;
+      var videoStartTime = 0;
+      videos.forEach(function(video, index) {
+        if (playlistStartTime >= currDuration) {
+          videoIndex = index;
+          videoStartTime = playlistStartTime - currDuration;
+        }
+
+        currDuration += parseInt(video.duration);
+      });
+
+      // Set the video and start time.
+      this.currentVideo = videos[videoIndex];
+      this.videoStartTime = videoStartTime;
     }
   });
 

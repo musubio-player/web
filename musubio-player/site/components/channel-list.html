@@ -11,9 +11,10 @@ Example:
   <template>
     <iron-ajax
       auto
-      url="https://musubio-player-api.appspot.com/_ah/api/musubio/v1/channels"
+      url="{{apiHost}}/_ah/api/musubio/v1/channels"
       handle-as="json"
-      last-response="{{response}}"></iron-ajax>
+      last-response="{{response}}">
+    </iron-ajax>
 
     <template class="channel" is="dom-repeat" items="{{response.channels}}" as="channel">
       <paper-card class="item-list">
@@ -35,6 +36,12 @@ Example:
 
 <script>
   Polymer({
-    is: 'channel-list'
+    is: 'channel-list',
+    properties: {
+      apiHost: {
+        type: String,
+        value: musubioApiHost
+      }
+    }
   });
 </script>
