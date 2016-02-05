@@ -192,6 +192,11 @@ function MusubioChannel(options) {
       if (that.onVideoChangeObserver != null) {
         that.onVideoChangeObserver.onVideoChange(that.currentVideo);
       }
+    } else {
+      if (event.data == YT.PlayerState.PAUSED) {
+        console.log(that.currentVideo);
+        that.activePlayer.player.playVideo();
+      }
     }
   };
 

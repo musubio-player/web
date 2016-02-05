@@ -9,36 +9,39 @@ Example:
     <player-toolbar></player-toolbar>
 
 -->
-<dom-module id="youtube-search">
+<dom-module id="player-toolbar">
   <template>
-    <paper-toolbar id="player-toolbar" elevation="1">
+    <paper-toolbar elevation="1">
       <paper-material class="image" elevation="3">
-        <iframe width="240" height="135" src="https://www.youtube.com/embed/d1AWMLgjyvk?rel=0&amp;controls=0&amp;showinfo=0&amp;start=12067&amp;t=3h21m7s&amp;autoplay=1" frameborder="0" allowfullscreen></iframe>
+        <iframe
+            width="240"
+            height="135"
+            src="https://www.youtube.com/embed/d1AWMLgjyvk?rel=0&amp;controls=0&amp;showinfo=0&amp;start=12067&amp;t=3h21m7s&amp;autoplay=0"
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
       </paper-material>
 
       <div class="content">
-        <div class="title">San Francisco Giants 2014 Highlights</div>
-        <div class="playlist">SF Giants Faves</div>
+        <div class="title">[[video.title]]</div>
+        <div class="playlist">[[channel.title]]</div>
       </div>
     </paper-toolbar>
+  </template>
 </dom-module>
 
 <script>
   Polymer({
-    is: 'youtube-search',
+    is: 'player-toolbar',
+    ready: function() {
 
-    properties: {
-      q: {
-        value: 'sfgiants',
-        notify: true
-      },
-      url: {
-        computed: 'computeUrl(q)'
-      }
     },
+    onChannelChange: function(channel, video) {
+      this.channel = channel;
+      this.video = video;
+    },
+    properties: {
 
-    computeUrl: function(q) {
-      return 'http://local.api.musubio.com/videos/search?q=' + q;
     }
   });
 </script>

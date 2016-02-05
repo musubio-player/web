@@ -63,62 +63,58 @@ body paper-toolbar#main-toolbar {
 body paper-drawer-panel:not([narrow]) #navicon {
   display: none;
 }
-/* line 69, ../sass/main.scss */
-body paper-toolbar#player-toolbar {
+/* line 68, ../sass/main.scss */
+body player-toolbar {
   position: fixed;
   width: 100%;
   bottom: 0px;
+  height: 75px;
   background: #333333;
-  height: 100px;
 }
-/* line 76, ../sass/main.scss */
-body paper-toolbar#player-toolbar .toolbar-tools {
-  height: 100px;
-}
-/* line 79, ../sass/main.scss */
-body paper-toolbar#player-toolbar .toolbar-tools .image {
+/* line 85, ../sass/main.scss */
+body player-toolbar .toolbar-tools .image {
   height: 135px;
   margin-bottom: 60px;
 }
-/* line 84, ../sass/main.scss */
-body paper-toolbar#player-toolbar .toolbar-tools .content {
+/* line 90, ../sass/main.scss */
+body player-toolbar .toolbar-tools .content {
   margin-left: 15px;
 }
-/* line 87, ../sass/main.scss */
-body paper-toolbar#player-toolbar .toolbar-tools .content .title {
+/* line 93, ../sass/main.scss */
+body player-toolbar .toolbar-tools .content .title {
   font-weight: bold;
   margin-bottom: 5px;
 }
-/* line 92, ../sass/main.scss */
-body paper-toolbar#player-toolbar .toolbar-tools .content .playlist {
+/* line 98, ../sass/main.scss */
+body player-toolbar .toolbar-tools .content .playlist {
   font-weight: normal;
 }
 
 /* Pages */
-/* line 101, ../sass/main.scss */
+/* line 107, ../sass/main.scss */
 paper-card.item-list {
   width: 210px;
   margin-right: 15px;
   margin-bottom: 15px;
 }
-/* line 106, ../sass/main.scss */
+/* line 112, ../sass/main.scss */
 paper-card.item-list .info {
   position: relative;
   overflow: hidden;
 }
-/* line 110, ../sass/main.scss */
+/* line 116, ../sass/main.scss */
 paper-card.item-list .info .image {
   margin-left: -90px;
 }
-/* line 113, ../sass/main.scss */
+/* line 119, ../sass/main.scss */
 paper-card.item-list .info .image img {
   height: 210px;
 }
-/* line 118, ../sass/main.scss */
+/* line 124, ../sass/main.scss */
 paper-card.item-list .info .content {
   padding: 10px;
 }
-/* line 121, ../sass/main.scss */
+/* line 127, ../sass/main.scss */
 paper-card.item-list .info .content .title {
   font-size: .9em;
 }

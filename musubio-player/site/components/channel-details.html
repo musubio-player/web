@@ -17,20 +17,8 @@ Example:
       last-response="{{channel}}">
     </iron-ajax>
 
-    <!--<iframe-->
-        <!--width="800"-->
-        <!--height="450"-->
-        <!--src="https://www.youtube.com/embed/{{currentVideo.video_id}}?rel=0&amp;showinfo=0&autoplay=1&controls=1&start={{videoStartTime}}"-->
-        <!--frameborder="0"-->
-        <!--allowfullscreen>-->
-    <!--</iframe>-->
     <div id="musubio-player1"></div>
     <div id="musubio-player2"></div>
-
-    <div class="current-video">
-      <h1>[[currentVideo.title]]</h1>
-      <div>[[currentVideo.description]]</div>
-    </div>
 
     <div class="channel-info">
       <h3>[[channel.title]]</h3>
@@ -78,8 +66,10 @@ Example:
       }
     },
     onVideoChange: function(video) {
-      console.log('onVideoChange()');
       this.currentVideo = video;
+
+      var controller = document.querySelector('main-controller');
+      controller.onChannelChange(this.channel, video);
     }
   });
 

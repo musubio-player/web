@@ -1,0 +1,74 @@
+<dom-module id="main-controller">
+  <template>
+    <paper-drawer-panel id="drawer-panel">
+      <paper-header-panel drawer>
+        <paper-toolbar id="nav-toolbar">
+          <div>
+            <iron-icon icon="av:play-circle-filled"></iron-icon>
+            Musubio Player
+          </div>
+        </paper-toolbar>
+
+        <paper-menu class="nav">
+          <paper-item>
+            <a href="/#/">
+              <iron-icon icon="home"></iron-icon>
+              Home
+            </a>
+          </paper-item>
+          <paper-item>
+            <a href="">
+              <iron-icon icon="search"></iron-icon>
+              Explore
+            </a>
+          </paper-item>
+
+          <div class="nav-divider"></div>
+
+          <paper-item>
+            <a href="">
+              <iron-icon icon="list"></iron-icon>
+                Find Playlist
+            </a>
+          </paper-item>
+        </paper-menu>
+      </paper-header-panel>
+
+      <paper-header-panel main>
+        <paper-toolbar id="main-toolbar">
+          <!--<paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>-->
+          <div class="title">Play Together</div>
+          <!--<paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>-->
+        </paper-toolbar>
+
+        <div class="content">
+          <template is="dom-bind">
+            <app-router>
+              <app-route path="/" import="/components/channel-list.html"></app-route>
+              <app-route path="/channels/:channelId" import="/components/channel-details.html"></app-route>
+              <app-route path="*" import="/components/404.html"></app-route>
+            </app-router>
+          </template>
+        </div>
+
+      </paper-header-panel>
+
+    </paper-drawer-panel>
+
+    <player-toolbar id="player-toolbar"></player-toolbar>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'main-controller',
+    ready: function() {
+//      var channel = {title:'Channel Title'};
+//      var video = {title:'Video Title'};
+//      this.$['player-toolbar'].onChannelChange(channel, video);
+    },
+    onChannelChange: function(channel, video) {
+      this.$['player-toolbar'].onChannelChange(channel, video);
+    }
+  });
+</script>

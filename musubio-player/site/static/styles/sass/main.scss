@@ -65,17 +65,24 @@ body {
   paper-drawer-panel:not([narrow]) #navicon {
     display: none;
   }
-
-  paper-toolbar#player-toolbar {
+  
+  player-toolbar {
     position: fixed;
     width: 100%;
     bottom: 0px;
+    height: 75px;
     background: $darker-grey;
-    height: 100px;
+
+    //#player-toolbar {
+    //  height: 100px;
+    //  background: #cc0000;
+    //}
+
+    .paper-toolbar {
+
+    }
 
     .toolbar-tools {
-      height: 100px;
-
       .image {
         height: 135px;
         margin-bottom: 60px;
