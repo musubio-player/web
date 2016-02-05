@@ -17,79 +17,77 @@ Example:
       last-response="{{channel}}">
     </iron-ajax>
 
-    <iframe
-        width="800"
-        height="450"
-        src="https://www.youtube.com/embed/{{currentVideo.video_id}}?rel=0&amp;showinfo=0&autoplay=1&controls=1&start={{videoStartTime}}"
-        frameborder="0"
-        allowfullscreen>
-    </iframe>
+    <!--<iframe-->
+        <!--width="800"-->
+        <!--height="450"-->
+        <!--src="https://www.youtube.com/embed/{{currentVideo.video_id}}?rel=0&amp;showinfo=0&autoplay=1&controls=1&start={{videoStartTime}}"-->
+        <!--frameborder="0"-->
+        <!--allowfullscreen>-->
+    <!--</iframe>-->
+    <div id="musubio-player1"></div>
+    <div id="musubio-player2"></div>
 
     <div class="current-video">
-      <h1>{{currentVideo.title}}</h1>
-      <div>{{currentVideo.description}}</div>
+      <h1>[[currentVideo.title]]</h1>
+      <div>[[currentVideo.description]]</div>
     </div>
 
     <div class="channel-info">
-      <h3>{{channel.title}}</h3>
-      <div>{{channel.description}}</div>
+      <h3>[[channel.title]]</h3>
+      <div>[[channel.description]]</div>
     </div>
 
     <h2>Playlist</h2>
     <template class="playlist" is="dom-repeat" items="{{channel.videos}}" as="video">
-      <img src="{{video.image.medium}}">
+      <img src="[[video.image.medium]]">
     </template>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
   </template>
 </dom-module>
 
+<script src="/static/scripts/js/musubio-channel.js"></script>
 <script>
+  var musubioChannel;
+  var youTubeIframeAPIReady = false;
+
+  // Create YouTube iFrame API elements.
+  var tag = document.createElement('script');
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+
   Polymer({
     is: 'channel-details',
     properties: {
       apiHost: {
         type: String,
         value: musubioApiHost
-      },
-      videoStartTime: {
-        type: Number
-      },
-      currentVideoId: {
-        type: String
       }
     },
     responseChannel: function(request) {
+      // Load YouTube iFrame API.
+      tag.src = "https://www.youtube.com/iframe_api";
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
       // Get the channel/video data from the API response.
       var channel = request.detail.response;
-      var videos = channel.videos;
+      musubioChannel = new MusubioChannel({ channel: channel });
+      musubioChannel.setOnVideoChangeObserver(this);
 
-      var playlistTotalDuration = 0;
-      videos.forEach(function(video) {
-        playlistTotalDuration += parseInt(video.duration);
-      });
-
-      var now = Math.floor(new Date().getTime() / 1000);
-      var baseTime = Math.floor(new Date(channel.created).getTime() / 1000);
-      var timeSinceBaseTime = now - baseTime;
-      var playlistStartTime = timeSinceBaseTime % playlistTotalDuration;
-
-      var currDuration = 0;
-      var videoIndex = 0;
-      var videoStartTime = 0;
-      videos.forEach(function(video, index) {
-        if (playlistStartTime >= currDuration) {
-          videoIndex = index;
-          videoStartTime = playlistStartTime - currDuration;
-        }
-
-        currDuration += parseInt(video.duration);
-      });
-
-      // Set the video and start time.
-      this.currentVideo = videos[videoIndex];
-      this.videoStartTime = videoStartTime;
+      if (youTubeIframeAPIReady == true) {
+        musubioChannel.loadPlayers();
+      }
+    },
+    onVideoChange: function(video) {
+      console.log('onVideoChange()');
+      this.currentVideo = video;
     }
   });
 
+  /**
+   * Callback when the YouTube iFrame API is loaded and ready.
+   */
+  function onYouTubeIframeAPIReady() {
+    youTubeIframeAPIReady = true;
+    musubioChannel.loadPlayers();
+  }
 </script>
