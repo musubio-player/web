@@ -34,50 +34,49 @@ Example:
   </template>
 </dom-module>
 
-<script src="/static/scripts/js/musubio-channel.js"></script>
 <script>
-  var musubioChannel;
-  var youTubeIframeAPIReady = false;
-
-  // Create YouTube iFrame API elements.
-  var tag = document.createElement('script');
-  var firstScriptTag = document.getElementsByTagName('script')[0];
-
-  Polymer({
-    is: 'channel-details',
-    properties: {
-      apiHost: {
-        type: String,
-        value: musubioApiHost
-      }
-    },
-    responseChannel: function(request) {
-      // Load YouTube iFrame API.
-      tag.src = "https://www.youtube.com/iframe_api";
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      // Get the channel/video data from the API response.
-      var channel = request.detail.response;
-      musubioChannel = new MusubioChannel({ channel: channel });
-      musubioChannel.setOnVideoChangeObserver(this);
-
-      if (youTubeIframeAPIReady == true) {
-        musubioChannel.loadPlayers();
-      }
-    },
-    onVideoChange: function(video) {
-      this.currentVideo = video;
-
-      var controller = document.querySelector('main-controller');
-      controller.onChannelChange(this.channel, video);
-    }
-  });
-
-  /**
-   * Callback when the YouTube iFrame API is loaded and ready.
-   */
-  function onYouTubeIframeAPIReady() {
-    youTubeIframeAPIReady = true;
-    musubioChannel.loadPlayers();
-  }
+//  var musubioChannel;
+//  var youTubeIframeAPIReady = false;
+//
+//  // Create YouTube iFrame API elements.
+//  var tag = document.createElement('script');
+//  var firstScriptTag = document.getElementsByTagName('script')[0];
+//
+//  Polymer({
+//    is: 'channel-details',
+//    properties: {
+//      apiHost: {
+//        type: String,
+//        value: musubioApiHost
+//      }
+//    },
+//    responseChannel: function(request) {
+//      // Load YouTube iFrame API.
+//      tag.src = "https://www.youtube.com/iframe_api";
+//      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+//
+//      // Get the channel/video data from the API response.
+//      var channel = request.detail.response;
+//      musubioChannel = new MusubioChannel({ channel: channel });
+//      musubioChannel.setOnVideoChangeObserver(this);
+//
+//      if (youTubeIframeAPIReady == true) {
+//        musubioChannel.loadPlayers();
+//      }
+//    },
+//    onVideoChange: function(video) {
+//      this.currentVideo = video;
+//
+//      var controller = document.querySelector('main-controller');
+//      controller.onChannelChange(this.channel, video);
+//    }
+//  });
+//
+//  /**
+//   * Callback when the YouTube iFrame API is loaded and ready.
+//   */
+//  function onYouTubeIframeAPIReady() {
+//    youTubeIframeAPIReady = true;
+//    musubioChannel.loadPlayers();
+//  }
 </script>

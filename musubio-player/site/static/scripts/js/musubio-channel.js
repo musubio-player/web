@@ -1,17 +1,34 @@
-function MusubioChannel(options) {
+function MusubioChannel() {
   var that = {};
 
+  // Video player instances.
   that.players = {};
+
+  // Instance states of the video players.
   that.activePlayer = null;
   that.secondaryPlayer = null;
+
+  // The time duration (in seconds) of the entire channel playlist.
   that.playlistTotalDuration = 0;
-  that.channel = options.channel;
-  that.videos = that.channel.videos;
+
+  // The current channel/videos loaded.
+  that.channel = null;
+  that.videos = [];
+
+  // Stored states of the currently playing video.
   that.currentVideoIndex = 0;
   that.currentVideo = null;
+
   that.videoStartTime = 0;
-  that.loadBufferTime = 7;  // in seconds
+
+  // The buffer time (in seconds) befor the video ends to load the next video.
+  that.loadBufferTime = 7;
+
+  // Stores an observer instance for a callback when the video changes.
   that.onVideoChangeObserver = null;
+
+  // Rolling of Ricks.
+  that.defaultVideoId = 'dQw4w9WgXcQ';
 
   /**
    * Initializes the channel.
@@ -20,16 +37,14 @@ function MusubioChannel(options) {
     // Hide the video players.
     document.getElementById('musubio-player1').style.display = 'none';
     document.getElementById('musubio-player2').style.display = 'none';
-
-    that.setChannelPlaylistDuration();
-    that.calculateCurrentVideo();
   };
 
   /**
-   *
+   * Sets an observer for a callback when the video changes.
    */
   that.setOnVideoChangeObserver = function(obj) {
     console.log('setOnVideoChangeObserver()');
+
     that.onVideoChangeObserver = obj;
   };
 
@@ -37,6 +52,8 @@ function MusubioChannel(options) {
    * Sets the duration (seconds) of the entire channel playlist.
    */
   that.setChannelPlaylistDuration = function() {
+    that.playlistTotalDuration = 0;
+
     that.videos.forEach(function(video) {
       that.playlistTotalDuration += parseInt(video.duration);
     });
@@ -88,66 +105,86 @@ function MusubioChannel(options) {
   };
 
   /**
-   *
+   * Load the video players into the DOM.
    */
-  that.loadPlayers = function() {
-    console.log('loadPlayers()');
+  that.initializePlayers = function() {
+    console.log('initializePlayers()');
 
-    var ytPlayer = new YT.Player('musubio-player1', {
-      width: '800',
-      height: '450',
-      videoId: that.currentVideo.video_id,
-      playerVars: {
-        controls: 0
-      },
-      events: {
-        onReady: function(event) {
-          that.onPlayerReady(event, 'musubio-player1');
-        },
-        onStateChange: that.onPlayerStateChange
-      }
-    });
-
-    that.players['musubio-player1'] = {
-      id: 'musubio-player1',
-      active: true,
-      player: ytPlayer
-    };
-
-    ytPlayer = new YT.Player('musubio-player2', {
-      width: '800',
-      height: '450',
-      videoId: that.currentVideo.video_id,
-      playerVars: {
-        controls: 0
-      },
-      events: {
-        onReady: function(event) {
-          that.onPlayerReady(event, 'musubio-player2');
-        },
-        onStateChange: that.onPlayerStateChange
-      }
-    });
-
-    that.players['musubio-player2'] = {
-      id: 'musubio-player2',
-      active: false,
-      player: ytPlayer
-    };
+    // Create 2 YouTube player instances:
+    // one as an active video, the other to preload the next video.
+    that.createPlayerInstance('musubio-player1', true);
+    that.createPlayerInstance('musubio-player2', false);
 
     that.activePlayer = that.players['musubio-player1'];
     that.secondaryPlayer = that.players['musubio-player2'];
-    document.getElementById('musubio-player1').style.display = 'block';
+  };
 
+  /**
+   * Create a YouTube video player instance.
+   *
+   * @param id
+   * @param active
+   */
+  that.createPlayerInstance = function(id, active) {
+    console.log('createPlayerInstance()');
+
+    var ytPlayer = new YT.Player(id, {
+      videoId: that.defaultVideoId,
+      playerVars: {
+        controls: 1,
+        autoplay: 0
+      },
+      events: {
+        onReady: function(event) {
+          that.onPlayerReady(event, id);
+        },
+        onStateChange: that.onPlayerStateChange
+      }
+    });
+
+    that.players[id] = {
+      id: id,
+      player: ytPlayer,
+      intervalId: null
+    };
+  };
+
+  that.changeChannel = function(channel) {
+    console.log('changeChannel() from musubio-channel');
+
+    // Set the selected channel and videos.
+    that.channel = channel;
+    that.videos = that.channel.videos;
+
+    // Prepare video to be played.
+    that.setChannelPlaylistDuration();
+    that.calculateCurrentVideo();
+
+    that.activePlayer = that.players['musubio-player1'];
+    that.secondaryPlayer = that.players['musubio-player2'];
+
+    // Load and play.
+    that.activePlayer.player.loadVideoById(that.currentVideo.video_id, that.videoStartTime);
+    that.activePlayer.player.playVideo();
+    that.secondaryPlayer.player.stopVideo();
+    that.startListener();
+
+    // Show the active player.
+    document.getElementById('musubio-player1').style.display = 'block';
+    document.getElementById('musubio-player2').style.display = 'none';
+
+    // Observer callback that the video has changed.
     if (that.onVideoChangeObserver != null) {
-      that.onVideoChangeObserver.onVideoChange(that.currentVideo);
+      that.onVideoChangeObserver.onVideoChange(that.channel, that.currentVideo);
     }
   };
 
   /**
-   *
+   * Starts a listener to see if a video is within the buffer time to load the next video.
    */
   that.startListener = function() {
+    console.log('startListener()');
+
     that.activePlayer['intervalId'] = setInterval(function() {
       var currentVideoTime = that.activePlayer.player.getCurrentTime();
 
@@ -170,33 +207,35 @@ function MusubioChannel(options) {
    * Callback when the YouTube player is loaded and ready.
    */
   that.onPlayerReady = function(event, player) {
-    // Start the video.
-    if (that.players[player].active == true) {
-      that.activePlayer.player.seekTo(that.videoStartTime).playVideo();
-      that.startListener();
-    }
+    console.log('onPlayerReady()');
   };
 
   /**
+   * YouTube callback when the player instance has a state change.
    *
    * @param event
    */
   that.onPlayerStateChange = function(event) {
+    console.log('onPlayerStateChange()');
+
     if (event.data == YT.PlayerState.ENDED) {
+      console.log('YT.PlayerState.ENDED');
+
       that.swapActivePlayer();
       that.currentVideoIndex = that.getNextVideoIndex();
       that.currentVideo = that.videos[that.currentVideoIndex];
       that.activePlayer.player.playVideo();
       that.startListener();
 
+      // Observer callback that the video has changed.
       if (that.onVideoChangeObserver != null) {
-        that.onVideoChangeObserver.onVideoChange(that.currentVideo);
+        that.onVideoChangeObserver.onVideoChange(that.channel, that.currentVideo);
       }
-    } else {
-      if (event.data == YT.PlayerState.PAUSED) {
-        console.log(that.currentVideo);
-        that.activePlayer.player.playVideo();
-      }
+
+    } else if (event.data == YT.PlayerState.PAUSED) {
+      console.log('YT.PlayerState.PAUSED');
+
+      that.activePlayer.player.playVideo();
     }
   };
 
@@ -204,6 +243,8 @@ function MusubioChannel(options) {
    * Sets the active player as the secondary player, and the secondary player as the active.
    */
   that.swapActivePlayer = function() {
+    console.log('swapActivePlayer()');
+
     var tempPlayer = that.activePlayer;
     that.activePlayer = that.secondaryPlayer;
     that.activePlayer.active = true;

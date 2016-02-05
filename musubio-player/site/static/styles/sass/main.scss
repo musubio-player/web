@@ -60,26 +60,29 @@ body {
   paper-toolbar#main-toolbar {
     background-color: $primary-color !important;
     color: #ffffff;
+
+    .title {
+      margin-left: 0px;
+    }
   }
 
   paper-drawer-panel:not([narrow]) #navicon {
     display: none;
   }
-  
-  player-toolbar {
+
+  #player-toolbar {
     position: fixed;
     width: 100%;
     bottom: 0px;
-    height: 75px;
-    background: $darker-grey;
+    height: 100px;
 
-    //#player-toolbar {
-    //  height: 100px;
-    //  background: #cc0000;
-    //}
+    paper-toolbar {
+      height: 100px;
+      background: $darker-grey;
 
-    .paper-toolbar {
-
+      #topBar {
+        height: 100%;
+      }
     }
 
     .toolbar-tools {
@@ -88,8 +91,8 @@ body {
         margin-bottom: 60px;
       }
 
-      .content {
-        margin-left: 15px;
+      .video-details {
+        margin-left: 370px;
 
         .title {
           font-weight: bold;
@@ -100,6 +103,31 @@ body {
           font-weight: normal;
         }
       }
+    }
+  }
+}
+
+#musubio-player {
+  position: absolute;
+  z-index: 100;
+  
+  &.player-toolbar {
+    bottom: 10px;
+    left: 15px;
+
+    .player {
+      width: 356px;
+      height: 200px;
+    }
+  }
+
+  &.player-page {
+    top: 80px;
+    left: 270px;
+
+    .player {
+      width: 800px;
+      height: 450px;
     }
   }
 }

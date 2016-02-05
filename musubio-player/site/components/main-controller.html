@@ -1,5 +1,10 @@
 <dom-module id="main-controller">
   <template>
+    <paper-material id="musubio-player" class="player-toolbar" elevation="3">
+      <div id="musubio-player1" class="player"></div>
+      <div id="musubio-player2" class="player"></div>
+    </paper-material>
+
     <paper-drawer-panel id="drawer-panel">
       <paper-header-panel drawer>
         <paper-toolbar id="nav-toolbar">
@@ -60,15 +65,17 @@
 </dom-module>
 
 <script>
+  var mainController;
+
   Polymer({
     is: 'main-controller',
     ready: function() {
-//      var channel = {title:'Channel Title'};
-//      var video = {title:'Video Title'};
-//      this.$['player-toolbar'].onChannelChange(channel, video);
+      mainController = document.querySelector('main-controller');
     },
-    onChannelChange: function(channel, video) {
-      this.$['player-toolbar'].onChannelChange(channel, video);
+    onChannelChange: function(channel) {
+      console.log('onChannelChange() from main controller');
+
+      this.$['player-toolbar'].changeChannel(channel);
     }
   });
 </script>

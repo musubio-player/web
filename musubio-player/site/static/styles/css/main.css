@@ -59,62 +59,100 @@ body paper-toolbar#main-toolbar {
   background-color: #2ca94f !important;
   color: #ffffff;
 }
-/* line 65, ../sass/main.scss */
+/* line 64, ../sass/main.scss */
+body paper-toolbar#main-toolbar .title {
+  margin-left: 0px;
+}
+/* line 69, ../sass/main.scss */
 body paper-drawer-panel:not([narrow]) #navicon {
   display: none;
 }
-/* line 68, ../sass/main.scss */
-body player-toolbar {
+/* line 73, ../sass/main.scss */
+body #player-toolbar {
   position: fixed;
   width: 100%;
   bottom: 0px;
-  height: 75px;
+  height: 100px;
+}
+/* line 79, ../sass/main.scss */
+body #player-toolbar paper-toolbar {
+  height: 100px;
   background: #333333;
 }
-/* line 85, ../sass/main.scss */
-body player-toolbar .toolbar-tools .image {
+/* line 83, ../sass/main.scss */
+body #player-toolbar paper-toolbar #topBar {
+  height: 100%;
+}
+/* line 89, ../sass/main.scss */
+body #player-toolbar .toolbar-tools .image {
   height: 135px;
   margin-bottom: 60px;
 }
-/* line 90, ../sass/main.scss */
-body player-toolbar .toolbar-tools .content {
-  margin-left: 15px;
+/* line 94, ../sass/main.scss */
+body #player-toolbar .toolbar-tools .video-details {
+  margin-left: 370px;
 }
-/* line 93, ../sass/main.scss */
-body player-toolbar .toolbar-tools .content .title {
+/* line 97, ../sass/main.scss */
+body #player-toolbar .toolbar-tools .video-details .title {
   font-weight: bold;
   margin-bottom: 5px;
 }
-/* line 98, ../sass/main.scss */
-body player-toolbar .toolbar-tools .content .playlist {
+/* line 102, ../sass/main.scss */
+body #player-toolbar .toolbar-tools .video-details .playlist {
   font-weight: normal;
 }
 
+/* line 110, ../sass/main.scss */
+#musubio-player {
+  position: absolute;
+  z-index: 100;
+}
+/* line 114, ../sass/main.scss */
+#musubio-player.player-toolbar {
+  bottom: 10px;
+  left: 15px;
+}
+/* line 118, ../sass/main.scss */
+#musubio-player.player-toolbar .player {
+  width: 356px;
+  height: 200px;
+}
+/* line 124, ../sass/main.scss */
+#musubio-player.player-page {
+  top: 80px;
+  left: 270px;
+}
+/* line 128, ../sass/main.scss */
+#musubio-player.player-page .player {
+  width: 800px;
+  height: 450px;
+}
+
 /* Pages */
-/* line 107, ../sass/main.scss */
+/* line 136, ../sass/main.scss */
 paper-card.item-list {
   width: 210px;
   margin-right: 15px;
   margin-bottom: 15px;
 }
-/* line 112, ../sass/main.scss */
+/* line 141, ../sass/main.scss */
 paper-card.item-list .info {
   position: relative;
   overflow: hidden;
 }
-/* line 116, ../sass/main.scss */
+/* line 145, ../sass/main.scss */
 paper-card.item-list .info .image {
   margin-left: -90px;
 }
-/* line 119, ../sass/main.scss */
+/* line 148, ../sass/main.scss */
 paper-card.item-list .info .image img {
   height: 210px;
 }
-/* line 124, ../sass/main.scss */
+/* line 153, ../sass/main.scss */
 paper-card.item-list .info .content {
   padding: 10px;
 }
-/* line 127, ../sass/main.scss */
+/* line 156, ../sass/main.scss */
 paper-card.item-list .info .content .title {
   font-size: .9em;
 }
