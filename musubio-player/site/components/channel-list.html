@@ -38,6 +38,11 @@ Example:
 <script>
   Polymer({
     is: 'channel-list',
+    ready: function() {
+      console.log('ready() from channel-list');
+
+      mainController.setPlayerViewMode('toolbar');
+    },
     properties: {
       apiHost: {
         type: String,

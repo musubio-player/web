@@ -1,4 +1,4 @@
-<link rel="import" href="/static/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/static/bower_components/paper-progress/paper-progress.html">
 
 <!--
 A static player toolbar at the bottom of the app.
@@ -18,12 +18,25 @@ Example:
       last-response="{{channel}}">
     </iron-ajax>
 
-    <paper-toolbar elevation="1">
-      <div class="video-details">
-        <div class="title">[[video.title]]</div>
-        <div class="playlist">[[channel.title]]</div>
-      </div>
-    </paper-toolbar>
+    <paper-progress value="[[videoProgress]]"></paper-progress>
+
+    <template is="dom-if" if="playerViewMode == 'main'">
+      <paper-toolbar class$="player-toolbar-view-mode-[[playerViewMode]]" elevation="1">
+        <div class="video-details">
+          <div class="title">[[video.title]]</div>
+          <div class="playlist">[[channel.title]]</div>
+        </div>
+      </paper-toolbar>
+    </template>
+
+    <template is="dom-if" if="playerViewMode == 'toolbar'">
+      <paper-toolbar class$="player-toolbar-view-mode-[[playerViewMode]]" elevation="1">
+        <div class="video-details">
+          <div class="title">[[video.title]]</div>
+          <div class="playlist">[[channel.title]]</div>
+        </div>
+      </paper-toolbar>
+    </template>
   </template>
 </dom-module>
 
@@ -47,8 +60,15 @@ Example:
         type: String,
         value: musubioApiHost
       },
+      playerViewMode: {
+        type: String
+      },
       channelId: {
         type: Number
+      },
+      videoProgress: {
+        type: Number,
+        value: 0
       }
     },
     responseChannel: function(request) {
@@ -60,12 +80,21 @@ Example:
       var channel = request.detail.response;
       musubioChannel = new MusubioChannel();
       musubioChannel.setOnVideoChangeObserver(this);
+      musubioChannel.setOnVideoProgressObserver(this);
     },
     onVideoChange: function(channel, video) {
       console.log('onVideoChange()');
 
       this.channel = channel;
       this.video = video;
+    },
+    onVideoProgress: function(progress) {
+      this.videoProgress = progress;
+    },
+    setPlayerViewMode: function(mode) {
+      console.log('setPlayerViewMode()');
+      console.log('mode:', mode);
+      this.playerViewMode = mode;
     }
   });
 

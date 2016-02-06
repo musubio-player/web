@@ -18,6 +18,7 @@ function MusubioChannel() {
   // Stored states of the currently playing video.
   that.currentVideoIndex = 0;
   that.currentVideo = null;
+  that.currentVideoProgress = 0;  // percentage
 
   that.videoStartTime = 0;
 
@@ -26,6 +27,9 @@ function MusubioChannel() {
 
   // Stores an observer instance for a callback when the video changes.
   that.onVideoChangeObserver = null;
+
+  // Stores an observer instance for a callback of the video progress every second.
+  that.onVideoProgressObserver = null;
 
   // Rolling of Ricks.
   that.defaultVideoId = 'dQw4w9WgXcQ';
@@ -46,6 +50,15 @@ function MusubioChannel() {
     console.log('setOnVideoChangeObserver()');
 
     that.onVideoChangeObserver = obj;
+  };
+
+  /**
+   * Sets an observer for a callback of the video progress percentage.
+   */
+  that.setOnVideoProgressObserver = function(obj) {
+    console.log('setOnVideoProgressObserver()');
+
+    that.onVideoProgressObserver = obj;
   };
 
   /**
@@ -131,8 +144,10 @@ function MusubioChannel() {
     var ytPlayer = new YT.Player(id, {
       videoId: that.defaultVideoId,
       playerVars: {
-        controls: 1,
-        autoplay: 0
+        controls: 0,
+        autoplay: 0,
+        fs: 0,
+        disablekb: 0
       },
       events: {
         onReady: function(event) {
@@ -170,6 +185,7 @@ function MusubioChannel() {
     that.startListener();
 
     // Show the active player.
+    document.getElementById('musubio-player').style.display = 'block';
     document.getElementById('musubio-player1').style.display = 'block';
     document.getElementById('musubio-player2').style.display = 'none';
 
@@ -192,9 +208,12 @@ function MusubioChannel() {
 //        console.log('getCurrentTime():', currentVideoTime);
 //        console.log('delta:', that.currentVideo.duration - currentVideoTime);
 
+      if (that.onVideoProgressObserver != null) {
+        that.onVideoProgressObserver.onVideoProgress((currentVideoTime / that.currentVideo.duration) * 100);
+      }
+
       if ((that.currentVideo.duration - currentVideoTime) < that.loadBufferTime) {
         // Preload the next video.
-        console.log('===== LOAD NEXT VID');
         that.secondaryPlayer.player.loadVideoById(that.videos[that.getNextVideoIndex()].video_id, 0).pauseVideo();
 
         // Stop pinging for video data.

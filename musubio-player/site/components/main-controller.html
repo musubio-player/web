@@ -1,6 +1,6 @@
 <dom-module id="main-controller">
   <template>
-    <paper-material id="musubio-player" class="player-toolbar" elevation="3">
+    <paper-material id="musubio-player" class$="player-view-mode-[[playerViewMode]]" elevation="3">
       <div id="musubio-player1" class="player"></div>
       <div id="musubio-player2" class="player"></div>
     </paper-material>
@@ -15,34 +15,66 @@
         </paper-toolbar>
 
         <paper-menu class="nav">
-          <paper-item>
-            <a href="/#/">
-              <iron-icon icon="home"></iron-icon>
-              Home
-            </a>
-          </paper-item>
-          <paper-item>
-            <a href="">
+          <a href="#">
+            <paper-item>
+              <iron-icon icon="view-array"></iron-icon>
+              Channels
+            </paper-item>
+          </a>
+
+          <a href="#/trending">
+            <paper-item>
+              <iron-icon icon="assessment"></iron-icon>
+              Trending
+            </paper-item>
+          </a>
+
+          <a href="#/search">
+            <paper-item>
               <iron-icon icon="search"></iron-icon>
-              Explore
-            </a>
-          </paper-item>
+              Search
+            </paper-item>
+          </a>
 
           <div class="nav-divider"></div>
 
-          <paper-item>
-            <a href="">
+          <div class="title">Your Stuff</div>
+
+          <a href="#">
+            <paper-item>
+              <iron-icon icon="av:video-library"></iron-icon>
+              History
+            </paper-item>
+          </a>
+
+          <a href="#/channels">
+            <paper-item>
+              <iron-icon icon="view-array"></iron-icon>
+              Channels (10)
+            </paper-item>
+          </a>
+
+          <a href="#">
+            <paper-item>
+              <iron-icon icon="favorite-border"></iron-icon>
+              Favorites (3)
+            </paper-item>
+          </a>
+
+          <a href="#">
+            <paper-item>
               <iron-icon icon="list"></iron-icon>
-                Find Playlist
-            </a>
-          </paper-item>
+              Find Playlist
+            </paper-item>
+          </a>
+
         </paper-menu>
       </paper-header-panel>
 
       <paper-header-panel main>
         <paper-toolbar id="main-toolbar">
           <!--<paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>-->
-          <div class="title">Play Together</div>
+          <div class="title">Watch Together</div>
           <!--<paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>-->
         </paper-toolbar>
 
@@ -50,8 +82,11 @@
           <template is="dom-bind">
             <app-router>
               <app-route path="/" import="/components/channel-list.html"></app-route>
+              <app-route path="/trending" import="/components/trending-channels.html"></app-route>
+              <app-route path="/channels" import="/components/channel-list.html"></app-route>
+              <app-route path="/search" import="/components/youtube/search.html"></app-route>
               <app-route path="/channels/:channelId" import="/components/channel-details.html"></app-route>
-              <app-route path="*" import="/components/404.html"></app-route>
+              <!--<app-route path="*" import="/components/404.html"></app-route>-->
             </app-router>
           </template>
         </div>
@@ -66,16 +101,41 @@
 
 <script>
   var mainController;
+  var playerViewMode = 'main';
 
   Polymer({
     is: 'main-controller',
     ready: function() {
+      console.log('ready() from main-controller');
+
       mainController = document.querySelector('main-controller');
+      mainController.$['player-toolbar'].playerViewMode = playerViewMode;
     },
     onChannelChange: function(channel) {
       console.log('onChannelChange() from main controller');
 
-      this.$['player-toolbar'].changeChannel(channel);
+      mainController.$['player-toolbar'].changeChannel(channel);
+    },
+    setPlayerViewMode: function(viewMode) {
+      console.log('setPlayerViewMode()');
+      console.log(viewMode);
+
+      this.playerViewMode = viewMode;
+      mainController.$['player-toolbar'].playerViewMode = viewMode;
+    },
+//    setPlayerViewModeToMain: function() {
+//      console.log('setPlayerViewModeToMain()');
+//      mainController.$['player-toolbar'].setPlayerViewMode('main');
+//    },
+//    setPlayerViewModeToToolbar: function() {
+//      console.log('setPlayerViewModeToToolbar()');
+//      mainController.$['player-toolbar'].setPlayerViewMode('toolbar');
+//    },
+    properties: {
+      playerViewMode: {
+        type: String,
+        value: playerViewMode
+      }
     }
   });
 </script>

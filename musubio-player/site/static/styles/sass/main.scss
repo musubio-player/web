@@ -10,6 +10,10 @@ body {
     color: #333333;
   }
   
+  .hidden {
+    display: none;
+  }
+  
   /* Text helpers */
   .quiet {
     font-size: .8em;
@@ -33,11 +37,24 @@ body {
     paper-toolbar#nav-toolbar {
       background-color: #ffffff !important;
       color: $primary-color;
+      font-size: 1.2em;
+      
+      iron-icon {
+        margin-bottom: 2px;
+      }
     }
 
     paper-menu.nav {
+      font-size: .9em;
+
+      .title {
+        margin: 5px 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
       paper-item {
-        padding: 10px 0;
+        padding: 10px 15px;
         display: block;
       }
 
@@ -63,6 +80,8 @@ body {
 
     .title {
       margin-left: 0px;
+      line-height: 30px;
+      vertical-align: middle;
     }
   }
 
@@ -76,6 +95,11 @@ body {
     bottom: 0px;
     height: 100px;
 
+    paper-progress {
+      width: 100%;
+      height: 7px;
+    }
+
     paper-toolbar {
       height: 100px;
       background: $darker-grey;
@@ -83,24 +107,29 @@ body {
       #topBar {
         height: 100%;
       }
-    }
-
-    .toolbar-tools {
-      .image {
-        height: 135px;
-        margin-bottom: 60px;
-      }
 
       .video-details {
-        margin-left: 370px;
-
         .title {
+          font-size: 1.5em;
           font-weight: bold;
           margin-bottom: 5px;
         }
 
         .playlist {
           font-weight: normal;
+        }
+      }
+
+      &.player-toolbar-view-mode-main {
+        .video-details {
+          text-align: center;
+          margin: 0 auto;
+        }
+      }
+
+      &.player-toolbar-view-mode-toolbar {
+        .video-details {
+          margin-left: 370px;
         }
       }
     }
@@ -110,8 +139,9 @@ body {
 #musubio-player {
   position: absolute;
   z-index: 100;
+  display: none;
   
-  &.player-toolbar {
+  &.player-view-mode-toolbar {
     bottom: 10px;
     left: 15px;
 
@@ -121,7 +151,7 @@ body {
     }
   }
 
-  &.player-page {
+  &.player-view-mode-main {
     top: 80px;
     left: 270px;
 
@@ -162,4 +192,14 @@ paper-card.item-list {
       }
     }
   }
+}
+
+/* Polymer Overrides */
+#primaryProgress.paper-progress {
+  background-color: #cc0000 !important;
+  height: 7px;
+}
+
+#progressContainer.paper-progress {
+  height: 7px !important;
 }
