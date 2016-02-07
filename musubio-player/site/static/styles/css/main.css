@@ -196,3 +196,9 @@ paper-card.item-list .info .content .title {
 #progressContainer.paper-progress {
   height: 7px !important;
 }
+
+/* line 208, ../sass/main.scss */
+paper-button.action {
+  background: #cc0000;
+  color: #fff;
+}

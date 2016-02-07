@@ -12,7 +12,7 @@ Example:
   <template>
     <iron-ajax
       auto
-      url="[[apiHost]]/_ah/api/musubio/v1/channels/[[channelId]]"
+      url="[[musubioApiHost]]/_ah/api/musubio/v1/channels/[[channelId]]"
       handle-as="json"
       on-response="responseChannel"
       last-response="{{channel}}">
@@ -50,13 +50,16 @@ Example:
 
   Polymer({
     is: 'player-toolbar',
+    ready: function() {
+      console.log('ready() from player-toolbar');
+    },
     changeChannel: function(channel) {
       console.log('changeChannel()');
 
       musubioChannel.changeChannel(channel);
     },
     properties: {
-      apiHost: {
+      musubioApiHost: {
         type: String,
         value: musubioApiHost
       },

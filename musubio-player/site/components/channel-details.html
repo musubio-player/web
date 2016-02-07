@@ -11,7 +11,7 @@ Example:
   <template>
     <iron-ajax
       auto
-      url="{{apiHost}}/_ah/api/musubio/v1/channels/{{channelId}}"
+      url="[[musubioApiHost]]/_ah/api/musubio/v1/channels/[[channelId]]"
       handle-as="json"
       on-response="responseChannel"
       last-response="{{channel}}">
@@ -21,7 +21,10 @@ Example:
     <div id="musubio-player2"></div>
 
     <div class="channel-info">
-      <h3>[[channel.title]]</h3>
+      <h1>[[channel.title]]</h1>
+      <paper-button class="action" raised on-tap="onChannelSelected">
+        <iron-icon icon="notification:live-tv"></iron-icon> Watch Now
+      </paper-button>
       <div>[[channel.description]]</div>
     </div>
 
@@ -35,48 +38,28 @@ Example:
 </dom-module>
 
 <script>
-//  var musubioChannel;
-//  var youTubeIframeAPIReady = false;
-//
-//  // Create YouTube iFrame API elements.
-//  var tag = document.createElement('script');
-//  var firstScriptTag = document.getElementsByTagName('script')[0];
-//
-//  Polymer({
-//    is: 'channel-details',
-//    properties: {
-//      apiHost: {
-//        type: String,
-//        value: musubioApiHost
-//      }
-//    },
-//    responseChannel: function(request) {
-//      // Load YouTube iFrame API.
-//      tag.src = "https://www.youtube.com/iframe_api";
-//      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-//
-//      // Get the channel/video data from the API response.
-//      var channel = request.detail.response;
-//      musubioChannel = new MusubioChannel({ channel: channel });
-//      musubioChannel.setOnVideoChangeObserver(this);
-//
-//      if (youTubeIframeAPIReady == true) {
-//        musubioChannel.loadPlayers();
-//      }
-//    },
-//    onVideoChange: function(video) {
-//      this.currentVideo = video;
-//
-//      var controller = document.querySelector('main-controller');
-//      controller.onChannelChange(this.channel, video);
-//    }
-//  });
-//
-//  /**
-//   * Callback when the YouTube iFrame API is loaded and ready.
-//   */
-//  function onYouTubeIframeAPIReady() {
-//    youTubeIframeAPIReady = true;
-//    musubioChannel.loadPlayers();
-//  }
+  Polymer({
+    is: 'channel-details',
+    ready: function() {
+      console.log('ready() from channel-details');
+    },
+    properties: {
+      musubioApiHost: {
+        type: String,
+        value: musubioApiHost
+      },
+      channel: {
+        type: Object
+      }
+    },
+    responseChannel: function(request) {
+      // Get the channel/video data from the API response.
+      this.channel = request.detail.response;
+    },
+    onChannelSelected: function(event, detail, sender) {
+      console.log('onChannelSelected()');
+
+      mainController.onChannelChange(this.channel);
+    }
+  });
 </script>

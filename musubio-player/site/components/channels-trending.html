@@ -1,0 +1,28 @@
+<!--
+An element for fetching Musubio trending channels
+
+Example:
+
+    <trending></trending>
+
+@element trending
+-->
+<dom-module id="channels-trending">
+  <template>
+    <h1>Trending</h1>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'channels-trending',
+    ready: function() {
+      console.log('ready() from trending');
+
+      mainController.setPlayerViewMode('main');
+    },
+    properties: {
+
+    }
+  });
+</script>

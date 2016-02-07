@@ -203,3 +203,10 @@ paper-card.item-list {
 #progressContainer.paper-progress {
   height: 7px !important;
 }
+
+paper-button {
+  &.action {
+    background: #cc0000;
+    color: #fff;
+  }
+}

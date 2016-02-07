@@ -82,9 +82,9 @@
           <template is="dom-bind">
             <app-router>
               <app-route path="/" import="/components/channel-list.html"></app-route>
-              <app-route path="/trending" import="/components/trending-channels.html"></app-route>
+              <app-route path="/trending" import="/components/channels-trending.html"></app-route>
               <app-route path="/channels" import="/components/channel-list.html"></app-route>
-              <app-route path="/search" import="/components/youtube/search.html"></app-route>
+              <app-route path="/search" import="/components/search-youtube.html"></app-route>
               <app-route path="/channels/:channelId" import="/components/channel-details.html"></app-route>
               <!--<app-route path="*" import="/components/404.html"></app-route>-->
             </app-router>
@@ -123,14 +123,6 @@
       this.playerViewMode = viewMode;
       mainController.$['player-toolbar'].playerViewMode = viewMode;
     },
-//    setPlayerViewModeToMain: function() {
-//      console.log('setPlayerViewModeToMain()');
-//      mainController.$['player-toolbar'].setPlayerViewMode('main');
-//    },
-//    setPlayerViewModeToToolbar: function() {
-//      console.log('setPlayerViewModeToToolbar()');
-//      mainController.$['player-toolbar'].setPlayerViewMode('toolbar');
-//    },
     properties: {
       playerViewMode: {
         type: String,

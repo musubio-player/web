@@ -3,15 +3,15 @@ An element for searching videos on YouTube
 
 Example:
 
-    <youtube-search></youtube-search>
+    <search-youtube></search-youtube>
 
-@element youtube-search
+@element search-youtube
 -->
-<dom-module id="youtube-search">
+<dom-module id="search-youtube">
   <template>
     <iron-ajax
       auto
-      url="{{url}}"
+      url="[[musubioApiHost]]/_ah/api/musubio/v1/youtube/search?q=[[q]]"
       handle-as="json"
       last-response="{{response}}">
     </iron-ajax>
@@ -21,7 +21,8 @@ Example:
       <br /><br />
     </div>
 
-    <template class="video-list" is="dom-repeat" items="{{response.items}}" as="video">
+    <h2>YouTube Videos</h2>
+    <template class="video-list" is="dom-repeat" items="[[response.videos]]" as="video">
       <paper-card class="item-list">
         <div class="info">
           <div class="image">
@@ -38,20 +39,19 @@ Example:
 
 <script>
   Polymer({
-    is: 'youtube-search',
+    is: 'search-youtube',
+    ready: function() {
+      console.log('ready() from search-youtube');
+    },
     properties: {
+      musubioApiHost: {
+        type: String,
+        value: musubioApiHost
+      },
       q: {
         value: 'sfgiants',
         notify: true
-      },
-      url: {
-        computed: 'computeUrl(q)'
       }
-    },
-    computeUrl: function(q) {
-//      return 'https://musubio-player-api.appspot.com/_ah/api/musubio/v1/search?q=' + q;
-      return '{{apiHost}}/_ah/api/musubio/v1/search?q=' + q;
-//      return 'http://local.api.musubio.com/videos/search?q=' + q;
     }
   });
 </script>
