@@ -99,7 +99,6 @@ body {
     bottom: 0;
     height: 100px;
     z-index: 101;
-    
 
     paper-progress {
       width: 100%;
@@ -108,7 +107,7 @@ body {
 
     paper-toolbar {
       height: 100px;
-      background: $dark-grey;
+      background: $darker-grey;
 
       #topBar {
         height: 100%;

@@ -100,39 +100,39 @@ body #player-toolbar {
   height: 100px;
   z-index: 101;
 }
-/* line 104, ../sass/main.scss */
+/* line 103, ../sass/main.scss */
 body #player-toolbar paper-progress {
   width: 100%;
   height: 7px;
 }
-/* line 109, ../sass/main.scss */
+/* line 108, ../sass/main.scss */
 body #player-toolbar paper-toolbar {
   height: 100px;
-  background: #666666;
+  background: #333333;
 }
-/* line 113, ../sass/main.scss */
+/* line 112, ../sass/main.scss */
 body #player-toolbar paper-toolbar #topBar {
   height: 100%;
 }
-/* line 117, ../sass/main.scss */
+/* line 116, ../sass/main.scss */
 body #player-toolbar paper-toolbar .video-details {
   color: #fff;
 }
-/* line 120, ../sass/main.scss */
+/* line 119, ../sass/main.scss */
 body #player-toolbar paper-toolbar .video-details .title {
   font-size: 1.5em;
   font-weight: bold;
   margin-bottom: 5px;
 }
-/* line 126, ../sass/main.scss */
+/* line 125, ../sass/main.scss */
 body #player-toolbar paper-toolbar .video-details .playlist {
   font-weight: normal;
 }
-/* line 131, ../sass/main.scss */
+/* line 130, ../sass/main.scss */
 body #player-toolbar paper-toolbar .player-action-button {
   width: 20px;
 }
-/* line 134, ../sass/main.scss */
+/* line 133, ../sass/main.scss */
 body #player-toolbar paper-toolbar .player-action-button.toolbar {
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
@@ -140,56 +140,56 @@ body #player-toolbar paper-toolbar .player-action-button.toolbar {
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-/* line 144, ../sass/main.scss */
+/* line 143, ../sass/main.scss */
 body #player-toolbar paper-toolbar.player-toolbar-view-mode-main .player-action-button.main {
   display: none;
 }
-/* line 148, ../sass/main.scss */
+/* line 147, ../sass/main.scss */
 body #player-toolbar paper-toolbar.player-toolbar-view-mode-main .player-action-button.toolbar {
   display: inline-block;
 }
-/* line 152, ../sass/main.scss */
+/* line 151, ../sass/main.scss */
 body #player-toolbar paper-toolbar.player-toolbar-view-mode-main .video-details {
   text-align: center;
   margin: 0 auto;
 }
-/* line 159, ../sass/main.scss */
+/* line 158, ../sass/main.scss */
 body #player-toolbar paper-toolbar.player-toolbar-view-mode-toolbar .player-action-button.main {
   display: inline-block;
 }
-/* line 163, ../sass/main.scss */
+/* line 162, ../sass/main.scss */
 body #player-toolbar paper-toolbar.player-toolbar-view-mode-toolbar .player-action-button.toolbar {
   display: none;
 }
-/* line 167, ../sass/main.scss */
+/* line 166, ../sass/main.scss */
 body #player-toolbar paper-toolbar.player-toolbar-view-mode-toolbar .video-details {
   margin-left: 370px;
 }
 
-/* line 175, ../sass/main.scss */
+/* line 174, ../sass/main.scss */
 #musubio-player {
   position: absolute;
   display: none;
 }
-/* line 179, ../sass/main.scss */
+/* line 178, ../sass/main.scss */
 #musubio-player.player-view-mode-toolbar {
   bottom: 10px;
   left: 15px;
   z-index: 105;
 }
-/* line 184, ../sass/main.scss */
+/* line 183, ../sass/main.scss */
 #musubio-player.player-view-mode-toolbar .player {
   width: 356px;
   height: 200px;
 }
-/* line 190, ../sass/main.scss */
+/* line 189, ../sass/main.scss */
 #musubio-player.player-view-mode-main {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 100;
 }
-/* line 196, ../sass/main.scss */
+/* line 195, ../sass/main.scss */
 #musubio-player.player-view-mode-main .player {
   position: relative;
   width: 800px;
@@ -199,47 +199,47 @@ body #player-toolbar paper-toolbar.player-toolbar-view-mode-toolbar .video-detai
 }
 
 /* Pages */
-/* line 207, ../sass/main.scss */
+/* line 206, ../sass/main.scss */
 paper-card.item-list {
   width: 210px;
   margin-right: 15px;
   margin-bottom: 15px;
 }
-/* line 212, ../sass/main.scss */
+/* line 211, ../sass/main.scss */
 paper-card.item-list .info {
   position: relative;
   overflow: hidden;
 }
-/* line 216, ../sass/main.scss */
+/* line 215, ../sass/main.scss */
 paper-card.item-list .info .image {
   margin-left: -90px;
 }
-/* line 219, ../sass/main.scss */
+/* line 218, ../sass/main.scss */
 paper-card.item-list .info .image img {
   height: 210px;
 }
-/* line 224, ../sass/main.scss */
+/* line 223, ../sass/main.scss */
 paper-card.item-list .info .content {
   padding: 10px;
 }
-/* line 227, ../sass/main.scss */
+/* line 226, ../sass/main.scss */
 paper-card.item-list .info .content .title {
   font-size: .9em;
 }
 
 /* Polymer Overrides */
-/* line 239, ../sass/main.scss */
+/* line 238, ../sass/main.scss */
 #primaryProgress.paper-progress {
   background-color: #cc0000 !important;
   height: 7px;
 }
 
-/* line 244, ../sass/main.scss */
+/* line 243, ../sass/main.scss */
 #progressContainer.paper-progress {
   height: 7px !important;
 }
 
-/* line 249, ../sass/main.scss */
+/* line 248, ../sass/main.scss */
 paper-button.action {
   background: #cc0000;
   color: #fff;

@@ -1,5 +1,5 @@
-//var musubioApiHost = 'https://musubio-player-api.appspot.com';
-var musubioApiHost = 'http://localhost:8888';
+var musubioApiHost = 'https://musubio-player-api.appspot.com';
+//var musubioApiHost = 'http://localhost:8888';
 
 document.addEventListener('polymer-ready', function() {
   var navIcon = document.getElementById('nav-icon');

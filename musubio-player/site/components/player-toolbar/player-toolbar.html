@@ -18,18 +18,19 @@ Example:
       last-response="{{channel}}">
     </iron-ajax>
 
-    <paper-progress value="[[videoProgress]]"></paper-progress>
+    <div style="display: [[playerVisibility]]">
+      <paper-progress value="[[videoProgress]]"></paper-progress>
 
-    <paper-toolbar class$="player-toolbar-view-mode-[[playerViewMode]]" elevation="1">
-      <div class="video-details">
-        <div class="title">[[video.title]]</div>
-        <div class="playlist">[[channel.title]]</div>
+      <paper-toolbar class$="player-toolbar-view-mode-[[playerViewMode]]" elevation="1">
+        <div class="video-details">
+          <div class="title">[[video.title]]</div>
+          <div class="playlist">[[channel.title]]</div>
 
-        <iron-icon icon="open-in-new" class="hover player-action-button main" on-tap="changePlayerViewModeMain"></iron-icon>
-        <iron-icon icon="open-in-new" class="hover player-action-button   toolbar" on-tap="changePlayerViewModeToolbar"></iron-icon>
-      </div>
-    </paper-toolbar>
-
+          <iron-icon icon="open-in-new" class="hover player-action-button main" on-tap="changePlayerViewModeMain"></iron-icon>
+          <iron-icon icon="open-in-new" class="hover player-action-button   toolbar" on-tap="changePlayerViewModeToolbar"></iron-icon>
+        </div>
+      </paper-toolbar>
+    </div>
   </template>
 </dom-module>
 
@@ -63,6 +64,10 @@ Example:
         type: String,
         value: musubioApiHost
       },
+      playerVisibility: {
+        type: String,
+        value: 'none'
+      },
       playerViewMode: {
         type: String
       },
@@ -78,6 +83,7 @@ Example:
       console.log('changeChannel()');
 
       musubioChannel.changeChannel(channel);
+      this.playerVisibility = 'block';
 
       // Create a channel view history.
       console.log(channel.id);
@@ -118,7 +124,6 @@ Example:
    */
   function onYouTubeIframeAPIReady() {
     console.log('onYouTubeIframeAPIReady()');
-    console.log('^^^^^^^^^^^^^^^^^^^^^^^^^');
 
     musubioChannel.initializePlayers();
   }
