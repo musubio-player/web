@@ -1,9 +1,7 @@
 <dom-module id="main-controller">
   <template>
-    <paper-material id="musubio-player" class$="player-view-mode-[[playerViewMode]]" elevation="3">
-      <div id="musubio-player1" class="player"></div>
-      <div id="musubio-player2" class="player"></div>
-    </paper-material>
+    <paper-material id="musubio-player" class$="player-view-mode-[[playerViewMode]]" elevation="3"></paper-material>
+    <paper-toast id="toast" text="Hello world!"></paper-toast>
 
     <paper-drawer-panel id="drawer-panel">
       <paper-header-panel drawer>
@@ -61,13 +59,6 @@
             </paper-item>
           </a>
 
-          <a href="#">
-            <paper-item>
-              <iron-icon icon="list"></iron-icon>
-              Find Playlist
-            </paper-item>
-          </a>
-
         </paper-menu>
       </paper-header-panel>
 
@@ -96,6 +87,7 @@
     </paper-drawer-panel>
 
     <player-toolbar id="player-toolbar"></player-toolbar>
+    <channel-history></channel-history>
   </template>
 </dom-module>
 
@@ -106,13 +98,21 @@
   Polymer({
     is: 'main-controller',
     ready: function() {
-      console.log('ready() from main-controller');
+      console.log('ready()');
 
       mainController = document.querySelector('main-controller');
       mainController.$['player-toolbar'].playerViewMode = playerViewMode;
+
+      this.showToast('foo bar yo');
+    },
+    properties: {
+      playerViewMode: {
+        type: String,
+        value: playerViewMode
+      }
     },
     onChannelChange: function(channel) {
-      console.log('onChannelChange() from main controller');
+      console.log('onChannelChange()');
 
       mainController.$['player-toolbar'].changeChannel(channel);
     },
@@ -123,11 +123,11 @@
       this.playerViewMode = viewMode;
       mainController.$['player-toolbar'].playerViewMode = viewMode;
     },
-    properties: {
-      playerViewMode: {
-        type: String,
-        value: playerViewMode
-      }
+    showToast: function(message) {
+      var toast = this.$.toast;
+
+      toast.text = message;
+      toast.open();
     }
   });
 </script>

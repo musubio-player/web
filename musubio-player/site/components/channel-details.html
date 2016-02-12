@@ -17,15 +17,15 @@ Example:
       last-response="{{channel}}">
     </iron-ajax>
 
-    <div id="musubio-player1"></div>
-    <div id="musubio-player2"></div>
-
     <div class="channel-info">
       <h1>[[channel.title]]</h1>
+
+      <div>[[channel.description]]</div>
+      <br />
+
       <paper-button class="action" raised on-tap="onChannelSelected">
         <iron-icon icon="notification:live-tv"></iron-icon> Watch Now
       </paper-button>
-      <div>[[channel.description]]</div>
     </div>
 
     <h2>Playlist</h2>
@@ -41,7 +41,7 @@ Example:
   Polymer({
     is: 'channel-details',
     ready: function() {
-      console.log('ready() from channel-details');
+      console.log('ready()');
     },
     properties: {
       musubioApiHost: {

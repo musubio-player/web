@@ -22,7 +22,7 @@ function MusubioChannel() {
 
   that.videoStartTime = 0;
 
-  // The buffer time (in seconds) befor the video ends to load the next video.
+  // The buffer time (in seconds) before the video ends to load the next video.
   that.loadBufferTime = 7;
 
   // Stores an observer instance for a callback when the video changes.
@@ -38,9 +38,7 @@ function MusubioChannel() {
    * Initializes the channel.
    */
   that.init = function() {
-    // Hide the video players.
-    document.getElementById('musubio-player1').style.display = 'none';
-    document.getElementById('musubio-player2').style.display = 'none';
+    console.log('init()');
   };
 
   /**
@@ -77,13 +75,15 @@ function MusubioChannel() {
    */
   that.calculateCurrentVideo = function() {
     var now = Math.floor(new Date().getTime() / 1000);
-    var baseTime = Math.floor(new Date(that.channel.created).getTime() / 1000);
+
+    // "Z" added for Firefox compatibility
+    // http://stackoverflow.com/questions/15109894/new-date-works-differently-in-chrome-and-firefox
+    var baseTime = Math.floor(new Date(that.channel.created + 'Z').getTime() / 1000);
 //      var now = Math.floor(new Date('Wed Feb 04 2016 06:03:20 GMT-0800 (PST)').getTime() / 1000);
 //      var baseTime = Math.floor(new Date('Wed Feb 04 2016 06:00:00 GMT-0800 (PST)').getTime() / 1000);
 
     var timeSinceBaseTime = now - baseTime;
     var playlistStartTime = timeSinceBaseTime % that.playlistTotalDuration;
-
     var currDuration = 0;
     var videoIndex = 0;
     var startTime = 0;
@@ -100,6 +100,8 @@ function MusubioChannel() {
     that.currentVideoIndex = videoIndex;
     that.currentVideo = that.videos[that.currentVideoIndex];
     that.videoStartTime = startTime;
+
+    console.log('videoStartTime:', that.videoStartTime);
   };
 
   /**
@@ -140,6 +142,14 @@ function MusubioChannel() {
    */
   that.createPlayerInstance = function(id, active) {
     console.log('createPlayerInstance()');
+
+    // Inject a video player container element.
+    var playerElement = document.createElement('div');
+    playerElement.id = id;
+    playerElement.className = 'player';
+    playerElement.style.display = 'none';
+
+    document.getElementById('musubio-player').appendChild(playerElement);
 
     var ytPlayer = new YT.Player(id, {
       videoId: that.defaultVideoId,

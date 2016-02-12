@@ -24,6 +24,10 @@ body {
     font-size: 1.1em;
   }
 
+  .hover {
+    cursor: pointer;
+  }
+
   input[type="text"] {
     width: 100%;
     font-size: 2.0em;
@@ -70,7 +74,7 @@ body {
     background-color: #f9f9f9;
 
     .content {
-      padding: 15px;
+      padding: 15px 15px 150px 15px;
     }
   }
 
@@ -79,7 +83,7 @@ body {
     color: #ffffff;
 
     .title {
-      margin-left: 0px;
+      margin-left: 0;
       line-height: 30px;
       vertical-align: middle;
     }
@@ -92,8 +96,10 @@ body {
   #player-toolbar {
     position: fixed;
     width: 100%;
-    bottom: 0px;
+    bottom: 0;
     height: 100px;
+    z-index: 101;
+    
 
     paper-progress {
       width: 100%;
@@ -102,13 +108,15 @@ body {
 
     paper-toolbar {
       height: 100px;
-      background: $darker-grey;
+      background: $dark-grey;
 
       #topBar {
         height: 100%;
       }
 
       .video-details {
+        color: #fff;
+
         .title {
           font-size: 1.5em;
           font-weight: bold;
@@ -120,7 +128,27 @@ body {
         }
       }
 
+      .player-action-button {
+        width: 20px;
+
+        &.toolbar {
+          -webkit-transform: rotate(180deg);
+          -moz-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
+          -o-transform: rotate(180deg);
+          transform: rotate(180deg);
+        }
+      }
+
       &.player-toolbar-view-mode-main {
+        .player-action-button.main {
+          display: none;
+        }
+
+        .player-action-button.toolbar {
+          display: inline-block;
+        }
+
         .video-details {
           text-align: center;
           margin: 0 auto;
@@ -128,6 +156,14 @@ body {
       }
 
       &.player-toolbar-view-mode-toolbar {
+        .player-action-button.main {
+          display: inline-block;
+        }
+
+        .player-action-button.toolbar {
+          display: none;
+        }
+
         .video-details {
           margin-left: 370px;
         }
@@ -138,12 +174,12 @@ body {
 
 #musubio-player {
   position: absolute;
-  z-index: 100;
   display: none;
   
   &.player-view-mode-toolbar {
     bottom: 10px;
     left: 15px;
+    z-index: 105;
 
     .player {
       width: 356px;
@@ -152,12 +188,17 @@ body {
   }
 
   &.player-view-mode-main {
-    top: 80px;
-    left: 270px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .8);
+    z-index: 100;
 
     .player {
+      position: relative;
       width: 800px;
       height: 450px;
+      margin: 0 auto;
+      margin-top: 100px;
     }
   }
 }

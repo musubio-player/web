@@ -20,23 +20,16 @@ Example:
 
     <paper-progress value="[[videoProgress]]"></paper-progress>
 
-    <template is="dom-if" if="playerViewMode == 'main'">
-      <paper-toolbar class$="player-toolbar-view-mode-[[playerViewMode]]" elevation="1">
-        <div class="video-details">
-          <div class="title">[[video.title]]</div>
-          <div class="playlist">[[channel.title]]</div>
-        </div>
-      </paper-toolbar>
-    </template>
+    <paper-toolbar class$="player-toolbar-view-mode-[[playerViewMode]]" elevation="1">
+      <div class="video-details">
+        <div class="title">[[video.title]]</div>
+        <div class="playlist">[[channel.title]]</div>
 
-    <template is="dom-if" if="playerViewMode == 'toolbar'">
-      <paper-toolbar class$="player-toolbar-view-mode-[[playerViewMode]]" elevation="1">
-        <div class="video-details">
-          <div class="title">[[video.title]]</div>
-          <div class="playlist">[[channel.title]]</div>
-        </div>
-      </paper-toolbar>
-    </template>
+        <iron-icon icon="open-in-new" class="hover player-action-button main" on-tap="changePlayerViewModeMain"></iron-icon>
+        <iron-icon icon="open-in-new" class="hover player-action-button   toolbar" on-tap="changePlayerViewModeToolbar"></iron-icon>
+      </div>
+    </paper-toolbar>
+
   </template>
 </dom-module>
 
@@ -51,12 +44,19 @@ Example:
   Polymer({
     is: 'player-toolbar',
     ready: function() {
-      console.log('ready() from player-toolbar');
-    },
-    changeChannel: function(channel) {
-      console.log('changeChannel()');
+      console.log('ready()');
 
-      musubioChannel.changeChannel(channel);
+      // Load YouTube iFrame API.
+      tag.src = "https://www.youtube.com/iframe_api";
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    },
+    attached: function() {
+      console.log('attached()');
+
+      // Load Musubio player.
+      musubioChannel = new MusubioChannel();
+      musubioChannel.setOnVideoChangeObserver(this);
+      musubioChannel.setOnVideoProgressObserver(this);
     },
     properties: {
       musubioApiHost: {
@@ -74,16 +74,17 @@ Example:
         value: 0
       }
     },
-    responseChannel: function(request) {
-      // Load YouTube iFrame API.
-      tag.src = "https://www.youtube.com/iframe_api";
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    changeChannel: function(channel) {
+      console.log('changeChannel()');
 
+      musubioChannel.changeChannel(channel);
+
+      // Create a channel view history.
+      console.log(channel.id);
+    },
+    responseChannel: function(request) {
       // Get the channel/video data from the API response.
       var channel = request.detail.response;
-      musubioChannel = new MusubioChannel();
-      musubioChannel.setOnVideoChangeObserver(this);
-      musubioChannel.setOnVideoProgressObserver(this);
     },
     onVideoChange: function(channel, video) {
       console.log('onVideoChange()');
@@ -98,13 +99,27 @@ Example:
       console.log('setPlayerViewMode()');
       console.log('mode:', mode);
       this.playerViewMode = mode;
+      mainController.playerViewMode = mode;
+    },
+    changePlayerViewModeMain: function() {
+      console.log('changePlayerViewModeMain()');
+      this.setPlayerViewMode('main');
+    },
+    changePlayerViewModeToolbar: function() {
+      console.log('changePlayerViewModeToolbar()');
+      this.setPlayerViewMode('toolbar');
     }
   });
 
   /**
    * Callback when the YouTube iFrame API is loaded and ready.
+   *
+   * @todo error handling if the iFrame API is not available (404).
    */
   function onYouTubeIframeAPIReady() {
+    console.log('onYouTubeIframeAPIReady()');
+    console.log('^^^^^^^^^^^^^^^^^^^^^^^^^');
+
     musubioChannel.initializePlayers();
   }
 </script>
