@@ -11,43 +11,96 @@ Example:
   <template>
     <iron-ajax
       auto
-      url="[[musubioApiHost]]/_ah/api/musubio/v1/channels"
+      url="[[musubioApiHost]]/_ah/api/musubio/v1/channels/current"
       handle-as="json"
+      on-response="onResponseChannelList"
       last-response="{{response}}">
     </iron-ajax>
 
+    <paper-card class="main-content-card">
+      <paper-spinner id="channel-list-paper-spinner" class="center-viewport" alt="Loading Musubio Channels"></paper-spinner>
+
+      <div class="viewable-area">
+
+      </div>
+
+      <h1>[[title]]</h1>
+
+      <table id="channel-list-table">
+        <template class="channel" is="dom-repeat" items="{{response.channels}}" as="channel">
+          <tr>
+            <td>
+              <a href="#/channels/{{channel.id}}">
+                <img class="video-image" src="{{channel.videos.0.image.medium}}">
+              </a>
+            </td>
+            <td class="content">
+              <div class="channel-title">
+                <iron-icon icon="view-array"></iron-icon>
+                <strong>Channel:</strong> <a href="#/channels/{{channel.id}}">{{channel.title}}</a>
+              </div>
+
+              <div class="video-title">
+                <iron-icon icon="notification:live-tv"></iron-icon>
+                <strong>Now Playing:</strong>
+                <a href="">{{channel.videos.0.title}}</a>
+                <br />
+
+                <paper-button class="action" raised on-tap="onChannelSelected">
+                  <span>Watch Now</span>
+                </paper-button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2"><hr /></td>
+          </tr>
+        </template>
+      </table>
+    </paper-card>
+
+    <!--
     <template class="channel" is="dom-repeat" items="{{response.channels}}" as="channel">
-      <paper-card class="item-list">
+      <paper-card id="channel-list-grid" class="item-list">
         <a href="#/channels/{{channel.id}}">
-        <!--<a href="#/channels/{{channel.id}}" on-tap="onChannelSelected">-->
-        <!--<a href="#" on-tap="onChannelSelected" onclick="return false;">-->
           <div class="info">
             <div class="image">
               <img src="{{channel.videos.0.image.medium}}">
             </div>
             <div class="content">
               <div class="title">{{channel.title}}</div>
-              <div class="description quiet">{{channel.description}}</div>
             </div>
           </div>
         </a>
       </paper-card>
     </template>
+    -->
+
   </template>
 </dom-module>
 
 <script>
+  var spinner;
+
   Polymer({
     is: 'channel-list',
     ready: function() {
-      console.log('ready() from channel-list');
+      console.log('ready()');
 
       mainController.setPlayerViewMode('toolbar');
+
+      // Set the spinner default state.
+      spinner = this.$['channel-list-paper-spinner'];
+      spinner.active = true;
+      spinner.hidden = false;
     },
     properties: {
       musubioApiHost: {
         type: String,
         value: musubioApiHost
+      },
+      title: {
+        type: String
       }
     },
     onChannelSelected: function(event, detail, sender) {
@@ -55,6 +108,12 @@ Example:
 
       var channel = event.model.channel;
       mainController.onChannelChange(channel);
+    },
+    onResponseChannelList: function(request) {
+      // Hide spinner.
+      spinner.active = !spinner.active;
+      spinner.hidden = !spinner.hidden;
+      this.title = 'On Now';
     }
   });
 </script>

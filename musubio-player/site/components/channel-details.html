@@ -13,14 +13,16 @@ Example:
       auto
       url="[[musubioApiHost]]/_ah/api/musubio/v1/channels/[[channelId]]"
       handle-as="json"
-      on-response="responseChannel"
+      on-response="onResponseChannelDetails"
       last-response="{{channel}}">
     </iron-ajax>
+
+    <paper-spinner id="channel-details-paper-spinner" class="center-viewport" alt="Loading Musubio Channel"></paper-spinner>
 
     <div class="channel-info">
       <h1>[[channel.title]]</h1>
 
-      <div>[[channel.description]]</div>
+      <!--<div>[[channel.description]]</div>-->
       <br />
 
       <paper-button class="action" raised on-tap="onChannelSelected">
@@ -38,10 +40,17 @@ Example:
 </dom-module>
 
 <script>
+  var spinner;
+
   Polymer({
     is: 'channel-details',
     ready: function() {
       console.log('ready()');
+
+      // Set the spinner default state.
+      spinner = this.$['channel-details-paper-spinner'];
+      spinner.active = true;
+      spinner.hidden = false;
     },
     properties: {
       musubioApiHost: {
@@ -52,13 +61,18 @@ Example:
         type: Object
       }
     },
-    responseChannel: function(request) {
+    onResponseChannelDetails: function(request) {
       // Get the channel/video data from the API response.
       this.channel = request.detail.response;
+
+      // Hide spinner.
+      spinner.active = !spinner.active;
+      spinner.hidden = !spinner.hidden;
     },
     onChannelSelected: function(event, detail, sender) {
       console.log('onChannelSelected()');
 
+      // Play the current video for the channel.
       mainController.onChannelChange(this.channel);
     }
   });

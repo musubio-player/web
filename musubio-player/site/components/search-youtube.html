@@ -13,6 +13,7 @@ Example:
       auto
       url="[[musubioApiHost]]/_ah/api/musubio/v1/youtube/search?q=[[q]]"
       handle-as="json"
+      on-response="onResponseYouTubeSearchList"
       last-response="{{response}}">
     </iron-ajax>
 
@@ -22,6 +23,9 @@ Example:
     </div>
 
     <h2>YouTube Videos</h2>
+
+    <paper-spinner id="youtube-search-paper-spinner" class="center-viewport" alt="Loading YouTube search results"></paper-spinner>
+
     <template class="video-list" is="dom-repeat" items="[[response.videos]]" as="video">
       <paper-card class="item-list">
         <div class="info">
@@ -38,12 +42,19 @@ Example:
 </dom-module>
 
 <script>
+  var spinner;
+
   Polymer({
     is: 'search-youtube',
     ready: function() {
       console.log('ready() from search-youtube');
 
       mainController.setPlayerViewMode('toolbar');
+
+      // Set the spinner default state.
+      spinner = this.$['youtube-search-paper-spinner'];
+      spinner.active = true;
+      spinner.hidden = false;
     },
     properties: {
       musubioApiHost: {
@@ -54,6 +65,11 @@ Example:
         value: 'cats',
         notify: true
       }
+    },
+    onResponseYouTubeSearchList: function(request) {
+      // Hide spinner.
+      spinner.active = !spinner.active;
+      spinner.hidden = !spinner.hidden;
     }
   });
 </script>

@@ -12,87 +12,114 @@ body a {
   color: #333333;
 }
 /* line 13, ../sass/main.scss */
+body hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+/* line 22, ../sass/main.scss */
 body .hidden {
   display: none;
 }
-/* line 18, ../sass/main.scss */
+/* line 27, ../sass/main.scss */
 body .quiet {
   font-size: .8em;
   color: #999999;
 }
-/* line 23, ../sass/main.scss */
+/* line 32, ../sass/main.scss */
 body .loud {
   font-size: 1.1em;
 }
-/* line 27, ../sass/main.scss */
+/* line 36, ../sass/main.scss */
 body .hover {
   cursor: pointer;
 }
-/* line 31, ../sass/main.scss */
+/* line 40, ../sass/main.scss */
 body input[type="text"] {
   width: 100%;
   font-size: 2.0em;
   color: #666666;
 }
-/* line 38, ../sass/main.scss */
+/* line 46, ../sass/main.scss */
+body .center {
+  text-align: center;
+  margin: 0 auto;
+}
+/* line 50, ../sass/main.scss */
+body .center-viewport {
+  text-align: center;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+}
+/* line 58, ../sass/main.scss */
+body paper-card.main-content-card {
+  margin: 25px 0 0 25px;
+  width: 80%;
+  padding: 25px;
+}
+/* line 64, ../sass/main.scss */
 body [drawer] {
   background-color: #ffffff;
 }
-/* line 41, ../sass/main.scss */
+/* line 67, ../sass/main.scss */
 body [drawer] paper-toolbar#nav-toolbar {
   background-color: #ffffff !important;
   color: #2ca94f;
   font-size: 1.2em;
 }
-/* line 46, ../sass/main.scss */
+/* line 72, ../sass/main.scss */
 body [drawer] paper-toolbar#nav-toolbar iron-icon {
   margin-bottom: 2px;
 }
-/* line 51, ../sass/main.scss */
+/* line 77, ../sass/main.scss */
 body [drawer] paper-menu.nav {
   font-size: .9em;
 }
-/* line 54, ../sass/main.scss */
+/* line 80, ../sass/main.scss */
 body [drawer] paper-menu.nav .title {
   margin: 5px 15px;
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 60, ../sass/main.scss */
+/* line 86, ../sass/main.scss */
 body [drawer] paper-menu.nav paper-item {
   padding: 10px 15px;
   display: block;
 }
-/* line 65, ../sass/main.scss */
+/* line 91, ../sass/main.scss */
 body [drawer] paper-menu.nav .nav-divider {
   height: 1px;
   background-color: gainsboro;
   margin: 15px 0;
 }
-/* line 73, ../sass/main.scss */
+/* line 99, ../sass/main.scss */
 body [main] {
   background-color: #f9f9f9;
 }
-/* line 76, ../sass/main.scss */
-body [main] .content {
+/* line 102, ../sass/main.scss */
+body [main] #content-body {
   padding: 15px 15px 150px 15px;
 }
-/* line 81, ../sass/main.scss */
+/* line 107, ../sass/main.scss */
 body paper-toolbar#main-toolbar {
   background-color: #2ca94f !important;
   color: #ffffff;
 }
-/* line 85, ../sass/main.scss */
+/* line 111, ../sass/main.scss */
 body paper-toolbar#main-toolbar .title {
   margin-left: 0;
   line-height: 30px;
   vertical-align: middle;
 }
-/* line 92, ../sass/main.scss */
+/* line 118, ../sass/main.scss */
 body paper-drawer-panel:not([narrow]) #navicon {
   display: none;
 }
-/* line 96, ../sass/main.scss */
+/* line 122, ../sass/main.scss */
 body #player-toolbar {
   position: fixed;
   width: 100%;
@@ -100,39 +127,39 @@ body #player-toolbar {
   height: 100px;
   z-index: 101;
 }
-/* line 103, ../sass/main.scss */
+/* line 129, ../sass/main.scss */
 body #player-toolbar paper-progress {
   width: 100%;
   height: 7px;
 }
-/* line 108, ../sass/main.scss */
+/* line 134, ../sass/main.scss */
 body #player-toolbar paper-toolbar {
   height: 100px;
   background: #333333;
 }
-/* line 112, ../sass/main.scss */
+/* line 138, ../sass/main.scss */
 body #player-toolbar paper-toolbar #topBar {
   height: 100%;
 }
-/* line 116, ../sass/main.scss */
+/* line 142, ../sass/main.scss */
 body #player-toolbar paper-toolbar .video-details {
   color: #fff;
 }
-/* line 119, ../sass/main.scss */
+/* line 145, ../sass/main.scss */
 body #player-toolbar paper-toolbar .video-details .title {
   font-size: 1.5em;
   font-weight: bold;
   margin-bottom: 5px;
 }
-/* line 125, ../sass/main.scss */
+/* line 151, ../sass/main.scss */
 body #player-toolbar paper-toolbar .video-details .playlist {
   font-weight: normal;
 }
-/* line 130, ../sass/main.scss */
+/* line 156, ../sass/main.scss */
 body #player-toolbar paper-toolbar .player-action-button {
   width: 20px;
 }
-/* line 133, ../sass/main.scss */
+/* line 159, ../sass/main.scss */
 body #player-toolbar paper-toolbar .player-action-button.toolbar {
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
@@ -140,56 +167,56 @@ body #player-toolbar paper-toolbar .player-action-button.toolbar {
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-/* line 143, ../sass/main.scss */
+/* line 169, ../sass/main.scss */
 body #player-toolbar paper-toolbar.player-toolbar-view-mode-main .player-action-button.main {
   display: none;
 }
-/* line 147, ../sass/main.scss */
+/* line 173, ../sass/main.scss */
 body #player-toolbar paper-toolbar.player-toolbar-view-mode-main .player-action-button.toolbar {
   display: inline-block;
 }
-/* line 151, ../sass/main.scss */
+/* line 177, ../sass/main.scss */
 body #player-toolbar paper-toolbar.player-toolbar-view-mode-main .video-details {
   text-align: center;
   margin: 0 auto;
 }
-/* line 158, ../sass/main.scss */
+/* line 184, ../sass/main.scss */
 body #player-toolbar paper-toolbar.player-toolbar-view-mode-toolbar .player-action-button.main {
   display: inline-block;
 }
-/* line 162, ../sass/main.scss */
+/* line 188, ../sass/main.scss */
 body #player-toolbar paper-toolbar.player-toolbar-view-mode-toolbar .player-action-button.toolbar {
   display: none;
 }
-/* line 166, ../sass/main.scss */
+/* line 192, ../sass/main.scss */
 body #player-toolbar paper-toolbar.player-toolbar-view-mode-toolbar .video-details {
   margin-left: 370px;
 }
 
-/* line 174, ../sass/main.scss */
+/* line 200, ../sass/main.scss */
 #musubio-player {
   position: absolute;
   display: none;
 }
-/* line 178, ../sass/main.scss */
+/* line 204, ../sass/main.scss */
 #musubio-player.player-view-mode-toolbar {
   bottom: 10px;
   left: 15px;
   z-index: 105;
 }
-/* line 183, ../sass/main.scss */
+/* line 209, ../sass/main.scss */
 #musubio-player.player-view-mode-toolbar .player {
   width: 356px;
   height: 200px;
 }
-/* line 189, ../sass/main.scss */
+/* line 215, ../sass/main.scss */
 #musubio-player.player-view-mode-main {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 100;
 }
-/* line 195, ../sass/main.scss */
+/* line 221, ../sass/main.scss */
 #musubio-player.player-view-mode-main .player {
   position: relative;
   width: 800px;
@@ -199,47 +226,81 @@ body #player-toolbar paper-toolbar.player-toolbar-view-mode-toolbar .video-detai
 }
 
 /* Pages */
-/* line 206, ../sass/main.scss */
-paper-card.item-list {
+/* line 233, ../sass/main.scss */
+channel-list h1 {
+  margin: 0 0 15px 0;
+  font-weight: normal;
+}
+/* line 239, ../sass/main.scss */
+channel-list #channel-list-grid.item-list {
   width: 210px;
   margin-right: 15px;
   margin-bottom: 15px;
 }
-/* line 211, ../sass/main.scss */
-paper-card.item-list .info {
+/* line 244, ../sass/main.scss */
+channel-list #channel-list-grid.item-list .info {
   position: relative;
   overflow: hidden;
 }
-/* line 215, ../sass/main.scss */
-paper-card.item-list .info .image {
+/* line 248, ../sass/main.scss */
+channel-list #channel-list-grid.item-list .info .image {
   margin-left: -90px;
 }
-/* line 218, ../sass/main.scss */
-paper-card.item-list .info .image img {
+/* line 251, ../sass/main.scss */
+channel-list #channel-list-grid.item-list .info .image img {
   height: 210px;
 }
-/* line 223, ../sass/main.scss */
-paper-card.item-list .info .content {
+/* line 256, ../sass/main.scss */
+channel-list #channel-list-grid.item-list .info .content {
   padding: 10px;
 }
-/* line 226, ../sass/main.scss */
-paper-card.item-list .info .content .title {
+/* line 259, ../sass/main.scss */
+channel-list #channel-list-grid.item-list .info .content .title {
   font-size: .9em;
+  height: 40px;
+}
+/* line 273, ../sass/main.scss */
+channel-list #channel-list-table .video-image {
+  width: 200px;
+}
+/* line 277, ../sass/main.scss */
+channel-list #channel-list-table iron-icon {
+  margin-bottom: 3px;
+}
+/* line 281, ../sass/main.scss */
+channel-list #channel-list-table .content {
+  padding-left: 15px;
+  font-size: 1.1em;
+}
+/* line 285, ../sass/main.scss */
+channel-list #channel-list-table .content .channel-title {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ededed;
+}
+/* line 295, ../sass/main.scss */
+channel-list #channel-list-table .content paper-button {
+  font-size: .7em;
+  padding: 2px 8px;
+}
+/* line 299, ../sass/main.scss */
+channel-list #channel-list-table .content paper-button span {
+  vertical-align: middle;
 }
 
 /* Polymer Overrides */
-/* line 238, ../sass/main.scss */
+/* line 308, ../sass/main.scss */
 #primaryProgress.paper-progress {
   background-color: #cc0000 !important;
   height: 7px;
 }
 
-/* line 243, ../sass/main.scss */
+/* line 313, ../sass/main.scss */
 #progressContainer.paper-progress {
   height: 7px !important;
 }
 
-/* line 248, ../sass/main.scss */
+/* line 318, ../sass/main.scss */
 paper-button.action {
   background: #cc0000;
   color: #fff;

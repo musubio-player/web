@@ -9,17 +9,26 @@ body {
     text-decoration: none;
     color: #333333;
   }
-  
+
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+  }
+
   .hidden {
     display: none;
   }
-  
+
   /* Text helpers */
   .quiet {
     font-size: .8em;
     color: #999999;
   }
-  
+
   .loud {
     font-size: 1.1em;
   }
@@ -34,7 +43,24 @@ body {
     color: $dark-grey;
   }
 
+  .center {
+    text-align: center;
+    margin: 0 auto;
+  }
+  .center-viewport {
+    text-align: center;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+  }
+
   /* Template */
+  paper-card.main-content-card {
+    margin: 25px 0 0 25px;
+    width: 80%;
+    padding: 25px;
+  }
+
   [drawer] {
     background-color: #ffffff;
 
@@ -42,7 +68,7 @@ body {
       background-color: #ffffff !important;
       color: $primary-color;
       font-size: 1.2em;
-      
+
       iron-icon {
         margin-bottom: 2px;
       }
@@ -73,7 +99,7 @@ body {
   [main] {
     background-color: #f9f9f9;
 
-    .content {
+    #content-body {
       padding: 15px 15px 150px 15px;
     }
   }
@@ -174,7 +200,7 @@ body {
 #musubio-player {
   position: absolute;
   display: none;
-  
+
   &.player-view-mode-toolbar {
     bottom: 10px;
     left: 15px;
@@ -203,32 +229,76 @@ body {
 }
 
 /* Pages */
-paper-card.item-list {
-  width: 210px;
-  margin-right: 15px;
-  margin-bottom: 15px;
+channel-list {
+  h1 {
+    margin: 0 0 15px 0;
+    font-weight: normal;
+  }
 
-  .info {
-    position: relative;
-    overflow: hidden;
+  #channel-list-grid {
+    &.item-list {
+      width: 210px;
+      margin-right: 15px;
+      margin-bottom: 15px;
 
-    .image {
-      margin-left: -90px;
+      .info {
+        position: relative;
+        overflow: hidden;
 
-      img {
-        height: 210px;
+        .image {
+          margin-left: -90px;
+
+          img {
+            height: 210px;
+          }
+        }
+
+        .content {
+          padding: 10px;
+
+          .title {
+            font-size: .9em;
+            height: 40px;
+          }
+
+          .description {
+
+          }
+        }
       }
+    }
+  }
+
+  #channel-list-table {
+    .video-image {
+      width: 200px;
+    }
+
+    iron-icon {
+      margin-bottom: 3px;
     }
 
     .content {
-      padding: 10px;
+      padding-left: 15px;
+      font-size: 1.1em;
 
-      .title {
-        font-size: .9em;
+      .channel-title {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid $lighter-grey;
       }
 
-      .description {
-        
+      .video-title {
+
+      }
+
+      paper-button {
+        font-size: .7em;
+        padding: 2px 8px;
+
+        span {
+          vertical-align: middle;
+        }
       }
     }
   }
